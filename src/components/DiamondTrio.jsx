@@ -1,14 +1,13 @@
-import React from "react";
+import React from 'react';
 
-
-
-const DiamondTrio = () => {
+function DiamondTrio() {
   return (
-    <div className="diamond-trio-wrapper">
-      <div className="diamond-bg left-diamond"></div>
-      <div className="diamond-bg right-diamond"></div>
+    <div className="diamond-stack-wrapper">
+      <div className="diamond diamond-large"></div>
+      <div className="diamond diamond-medium"></div>
+      <div className="diamond diamond-small"></div>
     </div>
   );
-};
+}
 
 export default DiamondTrio;

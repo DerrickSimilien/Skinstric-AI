@@ -18,13 +18,29 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: white; /* ✅ Ensure background is always white like the original */
+   overflow-x: hidden;
 }
 
 
+
+/* =====================================
+   🖱️ Responsive & Accessibility
+===================================== */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
 
 a {
   font-weight: 500;
@@ -57,22 +73,6 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
-}
-
-/* =====================================
-   🖱️ Responsive & Accessibility
-===================================== */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
 
 /* =====================================
@@ -132,21 +132,29 @@ button:focus-visible {
 /* =====================================
    🏠 Home Page Layout
 ===================================== */
+.home-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+}
+
 .center-content {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  z-index: 1;
+  z-index: 2; /* always above the diamonds */
   max-width: 100%;
 }
 
 .center-content h1 {
-  font-size: 60px;
+  font-size: 80px;
   line-height: 1.1;
   font-weight: 400;
   margin: 0;
+  font-weight: bold;
 }
 
 .corner-text {
@@ -157,8 +165,9 @@ button:focus-visible {
   font-family: 'Helvetica Neue', sans-serif;
   font-weight: 400;
   line-height: 1.5;
-  color: #000; /* adjust as needed */
+  color: #000;
   max-width: 240px;
+  z-index: 2;
 }
 
 
@@ -207,38 +216,47 @@ button:focus-visible {
 /* =====================================
    🟨 Diamond Backgrounds (DiamondTrio)
 ===================================== */
-.diamond-trio-wrapper {
+.diamond-stack-wrapper {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden; /* ✅ contain the diamonds strictly within wrapper */
+  width: 100vw;
+  height: 100vh;
+
+}
+
+.diamond-stack-wrapper .diamond {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* allows clicks to pass through */
-  z-index: 0;
-}
-
-.diamond-bg {
-  position: absolute;
-  width: 150vh;
-  height: 150vh;
-  background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.05);
   transform: rotate(45deg);
-  z-index: 0;
+  background: transparent; /* ✅ make them transparent */
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.left-diamond {
-  top: 0;
-  left: -75vh;
+.diamond-large {
+  width: 100vh;
+  height: 100vh;
 }
 
-.right-diamond {
-  top: 0;
-  right: -75vh;
+.diamond-medium {
+   width: 80vh;
+  height: 80vh;
+}
+
+.diamond-small {
+  width: 60vh;
+  height: 60vh;
 }
 
 
-
+/* =====================================
+   📱 Mobile Adjustments
+===================================== */
 @media (max-width: 600px) {
   .corner-text {
     font-size: 10px;
