@@ -1,3 +1,6 @@
+/* =====================================
+   🌐 Global Variables & Base Styling
+===================================== */
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -13,6 +16,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -20,14 +33,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -54,6 +59,9 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* =====================================
+   🖱️ Responsive & Accessibility
+===================================== */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -64,5 +72,178 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+/* =====================================
+   🧭 Navbar Styles
+===================================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  width: 100%;
+  height: 64px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: white;
+  box-sizing: border-box;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #111;
+}
+
+.brand-name {
+  font-weight: bold;
+}
+
+.intro-label {
+  color: #666;
+}
+
+.enter-code-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 20px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 0;
+  height: 30px;
+  line-height: 1;
+  box-shadow: none;
+}
+
+/* =====================================
+   🏠 Home Page Layout
+===================================== */
+.center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+  max-width: 100%;
+}
+
+.center-content h1 {
+  font-size: 60px;
+  line-height: 1.1;
+  font-weight: 400;
+  margin: 0;
+}
+
+.corner-text {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-size: 12px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000; /* adjust as needed */
+  max-width: 240px;
+}
+
+
+/* =====================================
+   ⬅️➡️ Arrow Side Buttons
+===================================== */
+.side-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: Arial, sans-serif;
+  z-index: 2;
+}
+
+.side-button.left {
+  left: 40px;
+}
+
+.side-button.right {
+  right: 40px;
+}
+
+.diamond {
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.arrow {
+  transform: rotate(-45deg);
+  font-size: 14px;
+  color: black;
+}
+
+/* =====================================
+   🟨 Diamond Backgrounds (DiamondTrio)
+===================================== */
+.diamond-trio-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* allows clicks to pass through */
+  z-index: 0;
+}
+
+.diamond-bg {
+  position: absolute;
+  width: 150vh;
+  height: 150vh;
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.left-diamond {
+  top: 0;
+  left: -75vh;
+}
+
+.right-diamond {
+  top: 0;
+  right: -75vh;
+}
+
+
+
+@media (max-width: 600px) {
+  .corner-text {
+    font-size: 10px;
+    max-width: 180px;
+    left: 20px;
+    bottom: 20px;
   }
 }

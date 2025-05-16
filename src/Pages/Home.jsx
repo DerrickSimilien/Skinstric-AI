@@ -1,9 +1,14 @@
 import React from "react";
-import "./Home.css";
+import DiamondTrio from "../components/DiamondTrio";
+
+
 
 const Home = () => {
   return (
     <div className="home-container">
+
+  {/* 🔳 Large angled diamond backgrounds */}
+  <DiamondTrio />
 
       {/* Left side button */}
       <div className="side-button left">
@@ -27,10 +32,11 @@ const Home = () => {
       </div>
 
       {/* Bottom-left subtext */}
-      <p className="subtext">
-        SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALIZED ROUTINE
-        TAILORED TO WHAT YOUR SKIN NEEDS.
-      </p>
+      <div className="corner-text">
+  <p>SKINSTRIC DEVELOPED AN A.I. THAT CREATES A<br />
+  HIGHLY-PERSONALIZED ROUTINE TAILORED TO<br />
+  WHAT YOUR SKIN NEEDS.</p>
+</div>
 
     </div>
   );
