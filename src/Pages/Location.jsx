@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Introduction = () => {
+const Location = () => {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 
@@ -11,8 +11,8 @@ const Introduction = () => {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      localStorage.setItem("name", inputValue); // ✅ Save to localStorage
-      navigate("/location"); // ✅ Move to next question page
+      localStorage.setItem("location", inputValue); // ✅ Save to localStorage
+      navigate("/nationality"); // ✅ Move to next question page
     }
   };
 
@@ -24,7 +24,7 @@ const Introduction = () => {
       <div className="top-left-analysis">TO START ANALYSIS</div>
 
       {/* BACK BUTTON BOTTOM LEFT */}
-      <div className="bottom-left-nav" onClick={() => navigate("/")}>
+      <div className="bottom-left-nav" onClick={() => navigate("/Introduction")}>
         <div className="diamond small-diamond">
           <span className="arrow">◀</span>
         </div>
@@ -47,11 +47,11 @@ const Introduction = () => {
         />
         <div className="underline"></div>
         {!inputValue && (
-          <div className="placeholder-text">Introduce Yourself</div>
+          <div className="placeholder-text">Where are you from?</div>
         )}
       </div>
     </div>
   );
 };
 
-export default Introduction;
+export default Location;

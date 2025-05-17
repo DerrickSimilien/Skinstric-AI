@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Introduction = () => {
+const Nationality = () => {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
 
@@ -11,8 +11,8 @@ const Introduction = () => {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      localStorage.setItem("name", inputValue); // ✅ Save to localStorage
-      navigate("/location"); // ✅ Move to next question page
+      localStorage.setItem("nationality", inputValue); // ✅ Save nationality
+      navigate("/loading"); // ❗Replace this with your actual next step later
     }
   };
 
@@ -23,8 +23,8 @@ const Introduction = () => {
       {/* TOP LEFT ANALYSIS TEXT */}
       <div className="top-left-analysis">TO START ANALYSIS</div>
 
-      {/* BACK BUTTON BOTTOM LEFT */}
-      <div className="bottom-left-nav" onClick={() => navigate("/")}>
+      {/* BACK BUTTON to Location Page */}
+      <div className="bottom-left-nav" onClick={() => navigate("/location")}>
         <div className="diamond small-diamond">
           <span className="arrow">◀</span>
         </div>
@@ -41,17 +41,17 @@ const Introduction = () => {
           value={inputValue}
           onChange={handleChange}
           onKeyDown={(e) => {
-            if (e.key === "Enter") handleSubmit(); // ✅ Go to Location on Enter
+            if (e.key === "Enter") handleSubmit();
           }}
           className={inputValue ? "typing" : ""}
         />
         <div className="underline"></div>
         {!inputValue && (
-          <div className="placeholder-text">Introduce Yourself</div>
+          <div className="placeholder-text">What is your nationality?</div>
         )}
       </div>
     </div>
   );
 };
 
-export default Introduction;
+export default Nationality;

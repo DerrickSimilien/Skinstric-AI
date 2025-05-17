@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&display=swap');
+
 
 /* =====================================
    🌐 Global Variables & Base Styling
 ===================================== */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -24,7 +25,13 @@ body {
   min-height: 100vh;
   background: white; /* ✅ Ensure background is always white like the original */
    overflow-x: hidden;
+   font-family: 'Raleway', sans-serif;
 }
+
+* {
+  font-family: 'Raleway', sans-serif !important;
+}
+
 
 
 
@@ -286,7 +293,7 @@ button:focus-visible {
   height: 60vh;
 }
 
-/* INTRODUCTION PAGE */ 
+/* INTRODUCTION, LOCATION, & NATIONALITY PAGE */ 
 
 .introduction-page {
   position: relative;
@@ -311,13 +318,15 @@ button:focus-visible {
 
 .top-left-analysis {
   position: absolute;
-  top: 40px;
+  top: 64px; /* Below the navbar */
   left: 40px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
   color: #000;
-  z-index: 3;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  font-family: 'Raleway', sans-serif;
 }
 
 .bottom-left-nav {
@@ -353,48 +362,57 @@ button:focus-visible {
 }
 
 .center-input {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  width: 100%;
-  max-width: 800px;
+  z-index: 2;
 }
 
+
 .center-input input {
-  border: none;
-  outline: none;
-  font-size: 72px;
+  font-size: 64px;
   font-weight: 300;
   text-align: center;
-  color: transparent; /* Make actual input text invisible */
+  color: black;
   background: transparent;
-  width: auto;
+  border: none;
+  outline: none;
   caret-color: #333;
-  position: relative;
-  z-index: 2;
-  white-space: nowrap;
+  font-family: 'Raleway', sans-serif;
+  width: auto;
+  max-width: 90%;
 }
 
 .placeholder-text {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 72px;
+  font-size: 64px;
   font-weight: 300;
   color: #999;
   pointer-events: none;
+  font-family: 'Raleway', sans-serif;
   line-height: 1.2;
-   white-space: nowrap;
+  white-space: nowrap;
 }
+
+.center-input input,
+.placeholder-text {
+  font-size: 64px;
+   font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+}
+
 
 .click-to-type {
   font-size: 12px;
-  color: #999;
+  color: #9ca3af;
   text-transform: uppercase;
   margin-bottom: 12px;
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  letter-spacing: 1px;
+  font-family: 'Raleway', sans-serif;
 }
 
 .click-to-type.hidden {
@@ -403,13 +421,76 @@ button:focus-visible {
 
 .underline {
   height: 1px;
+  background-color: #999;
   width: 100%;
-  background: #333;
-  margin-top: 8px;
-  position: relative;
-  z-index: 2;
-  max-width: 600px;
+  max-width: 500px;
+  margin-top: 10px;
 }
+
+
+/* SUBMISSION */ 
+
+.submission-title {
+  font-size: 48px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+.submission-subtext {
+  font-size: 16px;
+  font-weight: 400;
+  color: #555;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+/* New Proceed Button Styles */
+.bottom-right-nav {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #000;
+  z-index: 3;
+}
+
+.proceed-text {
+  margin-right: 12px;
+}
+
+/* LOADING */ 
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #000000;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.analyzing-text {
+  font-size: 16px;
+  color: #555;
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+
 
 
 
