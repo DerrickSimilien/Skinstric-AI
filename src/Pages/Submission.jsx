@@ -20,17 +20,22 @@ const Submission = () => {
       </div>
 
       {/* PROCEED BUTTON */}
-      <div className="bottom-right-nav" onClick={() => navigate("/analysis")}>
+      {/* <div className="bottom-right-nav" onClick={() => navigate("/analysis")}>
         <span className="proceed-text">PROCEED</span>
         <div className="diamond small-diamond">
           <span className="arrow" style={{ transform: "rotate(135deg)" }}>▶</span>
         </div>
-      </div>
+      </div> */}
 
       {/* CENTERED MESSAGE */}
       <div className="center-input">
         <h1 className="submission-title">Results has been submitted!</h1>
         <p className="submission-subtext">Proceed to the next step</p>
+
+        {/* GO TO IMAGE UPLOAD BUTTON */}
+        <div className="go-to-upload-button" onClick={() => navigate("/image-upload")}>
+          GO TO IMAGE UPLOAD
+        </div>
       </div>
     </div>
   );

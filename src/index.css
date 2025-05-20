@@ -466,6 +466,27 @@ button:focus-visible {
   margin-right: 12px;
 }
 
+.go-to-upload-button {
+  margin-top: 30px;
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.go-to-upload-button:hover {
+  background-color: #333;
+}
+
+
 /* LOADING */ 
 
 .spinner {
@@ -491,6 +512,110 @@ button:focus-visible {
 }
 
 
+/* Image Uploading */ 
+
+/* Image Uploading */
+.image-options-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-top: 100px;
+}
+
+.image-option {
+  text-align: center;
+}
+
+.icon-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.option-label {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.4;
+  color: black;
+}
+
+.preview-section {
+  position: absolute;
+  top: 35%;
+  right: 40px;
+  text-align: left;
+}
+
+.preview-title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.preview-box {
+  width: 80px;
+  height: 80px;
+  border: 1px solid black;
+}
+
+/* If not already included in other pages */
+.top-left-analysis {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+}
+
+.top-right-code {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
+
+.enter-code-btn {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.bottom-left-nav {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.diamond.small-diamond {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.arrow {
+  transform: rotate(-45deg);
+  font-size: 14px;
+}
+
+.back-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: black;
+}
 
 
 

@@ -7,7 +7,7 @@ import Location from "./Pages/Location";
 import Nationality from "./Pages/Nationality";
 import Submission from "./Pages/Submission";
 import Loading from "./Pages/Loading";
-
+import ImageUpload from "./Pages/ImageUpload"; 
 
 
 
@@ -22,6 +22,8 @@ function App() {
        <Route path="/nationality" element={<Nationality />} />
        <Route path="/submission" element={<Submission />} />
        <Route path="/loading" element={<Loading />} />
+       <Route path="/image-upload" element={<ImageUpload />} />
+         <Route path="/image-upload" element={<ImageUpload />} />
       </Routes>
     </Router>
   );
