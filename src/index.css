@@ -235,6 +235,51 @@ button:focus-visible {
   right: 40px;
 }
 
+/* =====================================
+   💡 UPDATED: Icon Labels with Bold Arrows
+===================================== */
+.label-arrow {
+  position: absolute;
+  top: -90px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.arrow-down {
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  transform: rotate(45deg);
+  margin-top: 2px;
+}
+
+/* Arrow shaft */
+.arrow-head {
+  width: 4px;
+  height: 30px;
+  background-color: black;
+  position: relative;
+}
+
+/* Arrowhead */
+.arrow-head::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  border-bottom: 4px solid black;
+  border-right: 4px solid black;
+}
+
 
 .diamond {
   width: 32px;
@@ -526,12 +571,34 @@ button:focus-visible {
 
 
 .image-option {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-with-label {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px; /* spacing between label, arrow, and icon */
+}
+
+.floating-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
+  line-height: 1.4;
   text-align: center;
-  cursor: pointer;
-  position: relative;
+  z-index: 2;
+}
+
+.floating-label-wrapper {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  text-align: right;
 }
 
 .icon-img {
@@ -545,16 +612,16 @@ button:focus-visible {
   transform: scale(1.1);
 }
 
-.option-label {
-  font-size: 10px;
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-top: 10px;
-  line-height: 1.6;
-  letter-spacing: 0.5px;
+/* .option-label {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.4;
   color: black;
-  max-width: 120px;
-}
+  position: relative;
+  z-index: 2;
+} */
+
+
 
 .preview-section {
   position: absolute;
@@ -621,7 +688,7 @@ button:focus-visible {
   margin-right: 10px;
 }
 
-.arrow {
+.nav-arrow {
   transform: rotate(-45deg);
   font-size: 14px;
 }

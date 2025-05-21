@@ -20,30 +20,31 @@ const ImageUpload = () => {
       {/* BACK BUTTON */}
       <div className="bottom-left-nav" onClick={() => navigate("/submission")}>
         <div className="diamond small-diamond">
-          <span className="arrow">◀</span>
+          <span className="nav-arrow">◀</span>
         </div>
         <span className="back-text">BACK</span>
       </div>
 
       {/* IMAGE OPTIONS */}
       <div className="image-options-wrapper">
-  {/* SCAN FACE OPTION */}
-  <div className="image-option">
-    <img src="/Camera.png" alt="Scan Face" className="icon-img" />
-    <p className="option-label">
-      ALLOW A.I.<br />TO SCAN YOUR FACE
-    </p>
-  </div>
+        {/* LEFT ICON */}
+        <div className="image-option left-icon">
+          <div className="icon-with-label">
+            <div className="floating-label">ALLOW A.I.<br />TO SCAN YOUR FACE</div>
+            <div className="arrow-down">⬇</div>
+            <img src="public/Camera.png" alt="Camera" className="icon-img" />
+          </div>
+        </div>
 
-        {/* ACCESS GALLERY OPTION */}
-        <div className="image-option">
-    <img src="/image-gallery.png" alt="Access Gallery" className="icon-img" />
-    <p className="option-label">
-      ALLOW A.I.<br />ACCESS GALLERY
-    </p>
-  </div>
-</div>
-
+        {/* RIGHT ICON */}
+        <div className="image-option right-icon">
+          <div className="icon-with-label">
+            <div className="floating-label">ALLOW A.I.<br />ACCESS GALLERY</div>
+            <div className="arrow-down">⬇</div>
+            <img src="/image-gallery.png" alt="Gallery" className="icon-img" />
+          </div>
+        </div>
+      </div>
 
       {/* PREVIEW SECTION */}
       <div className="preview-section">
