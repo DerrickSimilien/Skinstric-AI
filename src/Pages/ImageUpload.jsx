@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const ImageUpload = () => {
   const navigate = useNavigate();
 
@@ -26,27 +25,25 @@ const ImageUpload = () => {
         <span className="back-text">BACK</span>
       </div>
 
-      <h1 style={{ color: "red", textAlign: "center" }}>HELLO FROM IMAGE UPLOAD</h1>
-
-
       {/* IMAGE OPTIONS */}
-      <div className="image-options-container">
-        {/* SCAN FACE OPTION */}
-        <div className="image-option">
-          <img src="/Camera.png" alt="Scan Face" className="icon-img" />
-          <p className="option-label">
-            ALLOW A.I.<br />TO SCAN YOUR FACE
-          </p>
-        </div>
+      <div className="image-options-wrapper">
+  {/* SCAN FACE OPTION */}
+  <div className="image-option">
+    <img src="/Camera.png" alt="Scan Face" className="icon-img" />
+    <p className="option-label">
+      ALLOW A.I.<br />TO SCAN YOUR FACE
+    </p>
+  </div>
 
         {/* ACCESS GALLERY OPTION */}
         <div className="image-option">
-          <img src="/image-gallery.png" alt="Access Gallery" className="icon-img" />
-          <p className="option-label">
-            ALLOW A.I.<br />ACCESS GALLERY
-          </p>
-        </div>
-      </div>
+    <img src="/image-gallery.png" alt="Access Gallery" className="icon-img" />
+    <p className="option-label">
+      ALLOW A.I.<br />ACCESS GALLERY
+    </p>
+  </div>
+</div>
+
 
       {/* PREVIEW SECTION */}
       <div className="preview-section">
