@@ -8,6 +8,8 @@ import Nationality from "./Pages/Nationality";
 import Submission from "./Pages/Submission";
 import Loading from "./Pages/Loading";
 import ImageUpload from "./Pages/ImageUpload"; 
+import CameraPage from "./Pages/CameraPage"; 
+import CameraError from "./Pages/CameraError"; 
 
 
 
@@ -23,7 +25,9 @@ function App() {
        <Route path="/submission" element={<Submission />} />
        <Route path="/loading" element={<Loading />} />
        <Route path="/image-upload" element={<ImageUpload />} />
-         <Route path="/image-upload" element={<ImageUpload />} />
+      <Route path="/image-upload" element={<ImageUpload />} />
+      <Route path="/camera" element={<CameraPage />} />
+       <Route path="/camera-error" element={<CameraError />} />
       </Routes>
     </Router>
   );

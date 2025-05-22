@@ -575,13 +575,15 @@ button:focus-visible {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .icon-with-label {
+  position: relative; /* ✅ this is important */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px; /* spacing between label, arrow, and icon */
+  z-index: 1;
 }
 
 .floating-label {
@@ -698,6 +700,205 @@ button:focus-visible {
   font-weight: 500;
   color: black;
 }
+
+@keyframes spinSquare {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.spinning-square {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 12px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.15));
+}
+
+.square-1 {
+  width: 220px;
+  height: 220px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  animation: spinSquare 8s linear infinite;
+}
+
+.square-2 {
+  width: 270px;
+  height: 270px;
+  background-color: rgba(0, 0, 0, 0.03);
+  border: 2px solid rgba(0, 0, 0, 0.08);
+  animation: spinSquare 16s linear infinite reverse;
+  filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.08));
+}
+
+/* On hover, glow with hot neon pink */
+.image-option:hover .square-1,
+.image-option:hover .square-2 {
+  border-color: rgba(255, 20, 147, 0.8);
+  background-color: rgba(255, 20, 147, 0.1);
+  filter:
+    drop-shadow(0 0 25px rgba(255, 20, 147, 0.5))
+    drop-shadow(0 0 50px rgba(255, 20, 147, 0.4))
+    brightness(1.3);
+  box-shadow: 0 0 50px rgba(255, 20, 147, 0.6);
+}
+
+/* CAMERA PAGE */ 
+
+.camera-page {
+  position: relative;
+  z-index: 1;
+  background-color: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.camera-feed {
+  width: 80vw;
+  height: auto;
+  max-height: 80vh;
+  object-fit: cover; /* 👈 ensures scaling */
+  background: #000;
+  border: 2px solid #ff1493;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+  z-index: 5;
+}
+
+.loading-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #aaa;
+  text-transform: uppercase;
+}
+
+
+.retry-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+
+.retry-btn:hover {
+  background-color: #333;
+}
+
+.camera-permission-modal {
+  background: #111;
+  color: white;
+  border: 1px solid #333;
+  padding: 40px;
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.4);
+  font-family: 'Raleway', sans-serif;
+}
+
+.modal-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+
+.deny-btn,
+.allow-btn {
+  min-width: 100px; /* 👈 helps keep consistent spacing */
+  text-align: center;
+  cursor: pointer;
+}
+
+.allow-btn {
+  cursor: pointer !important;
+  z-index: 1000 !important;
+  position: relative;
+}
+
+.deny-btn {
+   cursor: pointer !important;
+  z-index: 1000 !important;
+  position: relative;
+}
+
+.deny-btn {
+  color: #888;
+}
+
+.allow-btn {
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.allow-btn:hover {
+  background-color: #ff1493;
+  color: white;
+  border-color: #ff1493;
+}
+
+.camera-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.control-btn {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer !important; /* 👈 force pointer */
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.control-btn:hover {
+  background-color: #ff1493 !important; /* 👈 hot pink hover */
+  color: white !important;
+  border-color: #ff1493 !important;
+  box-shadow: 0 0 10px #ff1493;
+}
+
+.control-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 20px #ff1493;
+}
+
 
 
 

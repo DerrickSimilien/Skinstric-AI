@@ -30,16 +30,30 @@ const ImageUpload = () => {
         {/* LEFT ICON */}
         <div className="image-option left-icon">
           <div className="icon-with-label">
-            <div className="floating-label">ALLOW A.I.<br />TO SCAN YOUR FACE</div>
+            {/* Spinning squares behind the icon */}
+            <div className="spinning-square square-1"></div>
+            <div className="spinning-square square-2"></div>
+
+            {/* Floating label and icon */}
+            <div className="floating-label">
+              ALLOW A.I.<br />TO SCAN YOUR FACE
+            </div>
             <div className="arrow-down">⬇</div>
-            <img src="public/Camera.png" alt="Camera" className="icon-img" />
+            <img src="/Camera.png" alt="Camera" className="icon-img"  onClick={() => navigate("/camera")} />
           </div>
         </div>
 
         {/* RIGHT ICON */}
         <div className="image-option right-icon">
           <div className="icon-with-label">
-            <div className="floating-label">ALLOW A.I.<br />ACCESS GALLERY</div>
+            {/* Spinning squares behind the icon */}
+            <div className="spinning-square square-1"></div>
+            <div className="spinning-square square-2"></div>
+
+            {/* Floating label and icon */}
+            <div className="floating-label">
+              ALLOW A.I.<br />ACCESS GALLERY
+            </div>
             <div className="arrow-down">⬇</div>
             <img src="/image-gallery.png" alt="Gallery" className="icon-img" />
           </div>
