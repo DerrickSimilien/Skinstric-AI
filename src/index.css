@@ -643,6 +643,11 @@ button:focus-visible {
   width: 110px;  /* ⬅️ was 80px */
   height: 110px; /* ⬅️ was 80px */
   border: 1px solid black;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 /* If not already included in other pages */
@@ -898,6 +903,22 @@ button:focus-visible {
   transform: scale(0.97);
   box-shadow: 0 0 20px #ff1493;
 }
+
+/* PREVIEW BOX SECTION */
+
+.preview-box img.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-placeholder {
+  font-size: 12px;
+  color: #999;
+}
+
+
 
 
 

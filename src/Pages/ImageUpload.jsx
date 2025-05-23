@@ -1,8 +1,16 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ImageUpload = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [capturedImage, setCapturedImage] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.capturedImage) {
+      setCapturedImage(location.state.capturedImage);
+    }
+  }, [location]);
 
   return (
     <div className="introduction-page">
@@ -30,27 +38,26 @@ const ImageUpload = () => {
         {/* LEFT ICON */}
         <div className="image-option left-icon">
           <div className="icon-with-label">
-            {/* Spinning squares behind the icon */}
             <div className="spinning-square square-1"></div>
             <div className="spinning-square square-2"></div>
-
-            {/* Floating label and icon */}
             <div className="floating-label">
               ALLOW A.I.<br />TO SCAN YOUR FACE
             </div>
             <div className="arrow-down">⬇</div>
-            <img src="/Camera.png" alt="Camera" className="icon-img"  onClick={() => navigate("/camera")} />
+            <img
+              src="/Camera.png"
+              alt="Camera"
+              className="icon-img"
+              onClick={() => navigate("/camera")}
+            />
           </div>
         </div>
 
         {/* RIGHT ICON */}
         <div className="image-option right-icon">
           <div className="icon-with-label">
-            {/* Spinning squares behind the icon */}
             <div className="spinning-square square-1"></div>
             <div className="spinning-square square-2"></div>
-
-            {/* Floating label and icon */}
             <div className="floating-label">
               ALLOW A.I.<br />ACCESS GALLERY
             </div>
@@ -63,7 +70,11 @@ const ImageUpload = () => {
       {/* PREVIEW SECTION */}
       <div className="preview-section">
         <p className="preview-title">Preview</p>
-        <div className="preview-box"></div>
+        <div className="preview-box">
+          {capturedImage ? (
+            <img src={capturedImage} alt="Captured Preview" className="preview-image" />
+          ) : null}
+        </div>
       </div>
     </div>
   );

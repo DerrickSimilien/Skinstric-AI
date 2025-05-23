@@ -110,7 +110,8 @@ const CameraPage = () => {
     ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
     const dataURL = canvas.toDataURL("image/png");
     console.log("📸 Captured Photo:", dataURL.substring(0, 100) + "...");
-    alert("Photo captured! (Check console)");
+    // alert("Photo captured! (Check console)");
+    navigate("/image-upload", { state: { capturedImage: dataURL } });
   };
 
   const toggleCamera = () => {
