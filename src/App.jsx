@@ -10,7 +10,9 @@ import Submission from "./Pages/Submission";
 import Loading from "./Pages/Loading";
 import ImageUpload from "./Pages/ImageUpload";
 import CameraPage from "./Pages/CameraPage";
-import CameraError from "./Pages/CameraError";
+import CameraError from './Pages/CameraError';
+import Analysis from './Pages/Analysis';
+
 
 const AppWrapper = () => {
   const location = useLocation();
@@ -33,7 +35,12 @@ const AppWrapper = () => {
         <Route path="/loading" element={<Loading />} />
         <Route path="/image-upload" element={<ImageUpload />} />
         <Route path="/camera" element={<CameraPage />} />
-        <Route path="/camera-error" element={<CameraError />} />
+        <Route path="/analysis" element={<Analysis />} />
+
+        <Route
+          path="/camera-error"
+          element={<CameraError onRetry={() => window.location.replace("/camera")} />}
+        />
       </Routes>
     </>
   );
