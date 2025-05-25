@@ -768,22 +768,19 @@ button:focus-visible {
 }
 
 .camera-feed {
-  width: 80vw;
-  height: auto;
+   width: 80vw;
   max-height: 80vh;
-  object-fit: cover; /* 👈 ensures scaling */
-  background: #000;
-  border: 2px solid #ff1493;
+  object-fit: cover;
+  background: black;
+  border: 2px solid hotpink;
   border-radius: 10px;
-  box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
-  z-index: 5;
 }
 
-.loading-text {
-  font-size: 16px;
-  font-weight: 500;
-  color: #aaa;
-  text-transform: uppercase;
+.loading-text,
+.tips-header,
+.tips-list p {
+  color: hotpink !important;
+  font-weight: 700 !important;
 }
 
 
@@ -1011,7 +1008,7 @@ button:focus-visible {
 /* Gallery upload */
 
 .confirmation-modal {
-  position: fixed;
+    position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -1039,7 +1036,7 @@ button:focus-visible {
 }
 
 .confirmation-text {
-  color: white;
+ color: white;
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -1065,7 +1062,7 @@ button:focus-visible {
 
 .confirm-btn:hover,
 .cancel-btn:hover {
-  background-color: #ff00ff;
+ background-color: #ff00ff;
   color: black;
   transform: scale(1.05);
   box-shadow: 0 0 12px #ff00ff;
@@ -1103,6 +1100,74 @@ button:focus-visible {
     color: #ff00ff;
   }
 }
+
+/* CAMERA SETUP */
+
+.loading-text {
+  text-align: center;
+  color: hotpink;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+.tips-container {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #333;
+}
+
+.tips-header {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.tips-list p {
+  margin: 4px 0;
+  font-size: 11px;
+}
+
+@keyframes spinIcon {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinning-camera-icon {
+  width: 50px;
+  height: 50px;
+  animation: spinIcon 1.5s linear infinite;
+  margin-bottom: 12px;
+}
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  font-weight: 600;
+}
+
+/* Make the camera icon spin */
+@keyframes spinCamera {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text img {
+  animation: spinCamera 2s linear infinite;
+}
+
 
 
 /* =====================================
