@@ -1102,31 +1102,32 @@ button:focus-visible {
 }
 
 .glow-button {
-  font-size: 16px;
-  padding: 14px 36px;
-  background-color: black;
-  color: white;
-  border: 2px solid #ff00ff;
+  background-color: transparent;
+  border: 2px solid #ff69b4;
+  color: #ff69b4;
+  padding: 12px 28px;
+  font-size: 18px;
+  font-weight: 600;
   border-radius: 8px;
+  margin: 10px;
   cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #ff69b4;
   letter-spacing: 1px;
-  box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
-  transition: all 0.3s ease-in-out;
 }
 
 .glow-button:hover {
-  background-color: #ff00ff;
-  color: black;
-  box-shadow: 0 0 25px #ff00ff, 0 0 50px #ff00ff;
+  background-color: #ff69b4;
+  color: #ffffff;
+  text-shadow: 0 0 10px white, 0 0 20px white;
+  transform: scale(1.08);
+  box-shadow: 0 0 15px #ff69b4, 0 0 30px #ff69b4;
 }
 
 .analysis-button-group {
   display: flex;
-  gap: 20px;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 
@@ -1225,6 +1226,208 @@ button:focus-visible {
     line-height: 60px;
   }
 }
+
+/* ANALYSIS OPTIONS */
+
+/* Container */
+.ao-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  overflow: hidden;
+}
+
+/* Background */
+.ao-diamond-bg {
+  position: absolute;
+  inset: 0;
+  background: transparent; /* or add bg-image if needed */
+}
+
+/* Top Left Text */
+.ao-top-left {
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  color: black;
+}
+
+.ao-heading {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ao-subtext {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* Diamond Chart */
+.ao-diamond-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.ao-diamond {
+  width: 160px;
+  height: 160px;
+  background-color: #f4f4f4;
+  color: black;
+  position: absolute;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ao-diamond:hover {
+  background-color: #ff69b4;
+  box-shadow: 0 0 15px #ff69b4, 0 0 30px #ff69b4;
+  color: white;
+  transform: rotate(45deg) scale(1.05);
+  animation: pulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: rotate(45deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(45deg) scale(1.1);
+  }
+}
+
+.ao-top { top: 0; left: 130px; background-color: #e6e8eb; }
+
+.ao-left { top: 130px; left: 0; }
+
+.ao-right { top: 130px; left: 260px; }
+
+.ao-bottom { top: 260px; left: 130px; }
+
+/* Navigation Buttons */
+.ao-back-btn,
+.ao-proceed-btn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.ao-back-btn {
+  bottom: 30px;
+  left: 30px;
+}
+
+.ao-proceed-btn {
+  bottom: 30px;
+  right: 30px;
+}
+
+.ao-small-diamond {
+  width: 30px;
+  height: 30px;
+  transform: rotate(45deg);
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ao-arrow {
+  transform: rotate(-45deg);
+  font-size: 14px;
+}
+
+.ao-back-text,
+.ao-proceed-text {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ao-diamond::before {
+  content: attr(data-label);
+  transform: rotate(-45deg);
+  display: inline-block;
+}
+
+.ao-label {
+  transform: rotate(-45deg);
+  display: block;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.2;
+  transition: all 0.3s ease;
+}
+
+.ao-diamond-chart-wrapper {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  margin: 0 auto;
+  top: 80px;
+}
+
+.ao-diamond-hover-area:hover .ao-outline {
+  opacity: 0.3;
+  animation: rippleGlow 2s ease-in-out infinite;
+}
+
+
+/* Base glowing outline */
+.ao-outline {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  border: 2px solid #ff69b4;
+  border-radius: 4px;
+  opacity: 0;
+  box-shadow: 0 0 15px #ff69b4;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Sizes of outlines */
+.ao-outline-1 { width: 420px; height: 420px; animation-delay: 0s; }
+
+.ao-outline-2 { width: 460px; height: 460px; animation-delay: 0.3s; }
+
+.ao-outline-3 { width: 500px; height: 500px; animation-delay: 0.6s; }
+
+.ao-outline-4 { width: 540px; height: 540px; animation-delay: 0.9s; }
+
+
+
+/* Glowing ripple animation */
+@keyframes rippleGlow {
+  0% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1.05);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+    opacity: 0.3;
+  }
+}
+
+
+
+
 
 /* =====================================
    📱 Mobile Adjustments FOR Introduction.Jsx

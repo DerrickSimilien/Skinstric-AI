@@ -20,7 +20,8 @@ const Analysis = () => {
   }, [location]);
 
   const handleProceed = () => {
-    navigate("/next-step"); // Replace this with your actual next page
+     console.log("proceed clicked");
+    navigate("/analysis-options"); 
   };
 
   const handleBack = () => {
@@ -37,12 +38,8 @@ const Analysis = () => {
           <>
             <h1 className="ripple-text">Image Analyzed Successfully!</h1>
             <div className="analysis-button-group">
-              <button className="glow-button" onClick={handleProceed}>
-                PROCEED
-              </button>
-              <button className="glow-button" onClick={handleBack}>
-                BACK
-              </button>
+                <button className="glow-button" onClick={handleProceed}>PROCEED</button>
+              <button className="glow-button" onClick={handleBack}>BACK</button>
             </div>
           </>
         )}

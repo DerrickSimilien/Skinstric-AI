@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
 import Introduction from "./Pages/Introduction";
-import './index.css';
+import './index.css'; 
 import Location from "./Pages/Location";
 import Nationality from "./Pages/Nationality";
 import Submission from "./Pages/Submission";
@@ -12,6 +12,7 @@ import ImageUpload from "./Pages/ImageUpload";
 import CameraPage from "./Pages/CameraPage";
 import CameraError from './Pages/CameraError';
 import Analysis from './Pages/Analysis';
+import AnalysisOptions from "./Pages/AnalysisOptions";
 
 
 const AppWrapper = () => {
@@ -36,7 +37,7 @@ const AppWrapper = () => {
         <Route path="/image-upload" element={<ImageUpload />} />
         <Route path="/camera" element={<CameraPage />} />
         <Route path="/analysis" element={<Analysis />} />
-
+         <Route path="/analysis-options" element={<AnalysisOptions />} />
         <Route
           path="/camera-error"
           element={<CameraError onRetry={() => window.location.replace("/camera")} />}
