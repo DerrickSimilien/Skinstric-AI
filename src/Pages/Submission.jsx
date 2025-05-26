@@ -4,6 +4,17 @@ import { useNavigate } from "react-router-dom";
 const Submission = () => {
   const navigate = useNavigate();
 
+  const handleGoToDemographics = () => {
+    navigate("/demographics", {
+      state: {
+        name: "Test User", // Replace later with real state
+        location: "New York",
+        nationality: "American",
+        capturedImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...", // Fake base64 placeholder for now
+      },
+    });
+  };
+
   return (
     <div className="introduction-page">
       <div className="diamond-bg"></div>
@@ -19,14 +30,6 @@ const Submission = () => {
         <span className="back-text">BACK</span>
       </div>
 
-      {/* PROCEED BUTTON */}
-      {/* <div className="bottom-right-nav" onClick={() => navigate("/analysis")}>
-        <span className="proceed-text">PROCEED</span>
-        <div className="diamond small-diamond">
-          <span className="arrow" style={{ transform: "rotate(135deg)" }}>▶</span>
-        </div>
-      </div> */}
-
       {/* CENTERED MESSAGE */}
       <div className="center-input">
         <h1 className="submission-title">Results has been submitted!</h1>
@@ -36,6 +39,11 @@ const Submission = () => {
         <div className="go-to-upload-button" onClick={() => navigate("/image-upload")}>
           GO TO IMAGE UPLOAD
         </div>
+
+        {/* 🚨 NEW: GO TO DEMOGRAPHICS TEST BUTTON */}
+        {/* <div className="go-to-upload-button" onClick={handleGoToDemographics}>
+          GO TO DEMOGRAPHICS (TEST)
+        </div> */}
       </div>
     </div>
   );

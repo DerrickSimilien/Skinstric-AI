@@ -4,6 +4,23 @@ import { useNavigate } from "react-router-dom";
 const AnalysisOptions = () => {
   const navigate = useNavigate();
 
+  // 🔁 This would later come from real state or context
+  const userName = "Test User";
+  const userLocation = "California";
+  const userNationality = "American";
+  const base64Image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."; // placeholder
+
+  const handleToDemographics = () => {
+    navigate("/demographics", {
+      state: {
+        name: userName,
+        location: userLocation,
+        nationality: userNationality,
+        capturedImage: base64Image,
+      },
+    });
+  };
+
   return (
     <div className="ao-container">
       {/* Optional background layer */}
@@ -30,7 +47,7 @@ const AnalysisOptions = () => {
 
           {/* Diamond Chart */}
           <div className="ao-diamond-grid">
-            <div className="ao-diamond ao-top">
+            <div className="ao-diamond ao-top" onClick={handleToDemographics}>
               <span className="ao-label">DEMOGRAPHICS</span>
             </div>
             <div className="ao-diamond ao-left">
@@ -54,8 +71,8 @@ const AnalysisOptions = () => {
         <span className="ao-back-text">BACK</span>
       </div>
 
-      {/* Proceed Button */}
-      <div className="ao-proceed-btn" onClick={() => navigate("/summary")}>
+      {/* 🚨 Updated: GET SUMMARY leads to demographics for now */}
+      <div className="ao-proceed-btn" onClick={handleToDemographics}>
         <span className="ao-proceed-text">GET SUMMARY</span>
         <div className="ao-small-diamond">
           <span className="ao-arrow">▶</span>

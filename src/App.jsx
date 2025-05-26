@@ -13,6 +13,7 @@ import CameraPage from "./Pages/CameraPage";
 import CameraError from './Pages/CameraError';
 import Analysis from './Pages/Analysis';
 import AnalysisOptions from "./Pages/AnalysisOptions";
+import DemographicsSummary from "./Pages/DemographicsSummary";
 
 
 const AppWrapper = () => {
@@ -37,7 +38,8 @@ const AppWrapper = () => {
         <Route path="/image-upload" element={<ImageUpload />} />
         <Route path="/camera" element={<CameraPage />} />
         <Route path="/analysis" element={<Analysis />} />
-         <Route path="/analysis-options" element={<AnalysisOptions />} />
+        <Route path="/analysis-options" element={<AnalysisOptions />} />
+        <Route path="/demographics" element={<DemographicsSummary />} />
         <Route
           path="/camera-error"
           element={<CameraError onRetry={() => window.location.replace("/camera")} />}
