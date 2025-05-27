@@ -1,5 +1,6 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../UserDataContext";
 
 const CameraPage = () => {
   const videoRef = useRef(null);
@@ -8,35 +9,24 @@ const CameraPage = () => {
   const [showPrompt, setShowPrompt] = useState(true);
   const [stream, setStream] = useState(null);
   const [facingMode, setFacingMode] = useState("user");
-  const [capturedImage, setCapturedImage] = useState(null); // final image for preview
-  const [tempImage, setTempImage] = useState(null); // temporary captured image for confirmation
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [capturedPhoto, setCapturedPhoto] = useState(null);
   const navigate = useNavigate();
+  const { userData, setUserData } = useContext(UserDataContext);
 
   const startCamera = async () => {
-    if (!videoRef.current) {
-      setIsLoading(false);
-      return;
-    }
-
+    if (!videoRef.current) return;
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode },
       });
-
       videoRef.current.srcObject = mediaStream;
-
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        await playPromise;
-      }
-
-      setStream(mediaStream);
+      await videoRef.current.play();
       setIsLoading(false);
       setCameraStarted(true);
+      setStream(mediaStream);
     } catch (err) {
+      console.error("Camera error:", err);
       setIsLoading(false);
-      setCameraStarted(false);
       navigate("/camera-error");
     }
   };
@@ -53,53 +43,36 @@ const CameraPage = () => {
     if (!showPrompt && isLoading && !cameraStarted && videoRef.current) {
       startCamera();
     }
-
-    return () => {
-      stopCamera();
-    };
-  }, [showPrompt, isLoading, facingMode, videoRef.current]);
+    return () => stopCamera();
+  }, [showPrompt, isLoading, facingMode]);
 
   const retakeCamera = () => {
+    setCapturedPhoto(null);
     stopCamera();
-    setCameraStarted(false);
-    setCapturedImage(null);
-    setTempImage(null);
-    setShowConfirmModal(false);
     setIsLoading(true);
   };
 
   const capturePhoto = () => {
     if (!videoRef.current || !cameraStarted) return;
-
     const canvas = document.createElement("canvas");
     canvas.width = videoRef.current.videoWidth;
     canvas.height = videoRef.current.videoHeight;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
     const dataURL = canvas.toDataURL("image/png");
-    setTempImage(dataURL);
-    setShowConfirmModal(true); // 🔥 Show confirmation modal
+    setCapturedPhoto(dataURL);
+    stopCamera();
   };
 
-  const confirmImage = () => {
-    setCapturedImage(tempImage); // Set the final image
-    setShowConfirmModal(false); // Hide modal
-    stopCamera(); // Optional: turn off camera once confirmed
+  const confirmPhoto = () => {
+    setUserData({ ...userData, capturedImage: capturedPhoto });
+    navigate("/image-upload", { state: { capturedImage: capturedPhoto } });
   };
 
   const toggleCamera = () => {
     stopCamera();
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
-    setCameraStarted(false);
     setIsLoading(true);
-  };
-
-  const proceedWithImage = () => {
-    if (capturedImage) {
-      navigate("/image-upload", {
-        state: { capturedImage },
-      });
-    }
   };
 
   return (
@@ -113,71 +86,44 @@ const CameraPage = () => {
             <button className="deny-btn" onClick={() => navigate("/camera-error")}>
               DENY
             </button>
-            <button
-              className="allow-btn"
-              onClick={() => {
-                setShowPrompt(false);
-                setIsLoading(true);
-              }}
-            >
+            <button className="allow-btn" onClick={() => {
+              setShowPrompt(false);
+              setIsLoading(true);
+            }}>
               ALLOW
             </button>
           </div>
         </div>
       )}
 
-      {!showPrompt && (
-        <>
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            className="camera-feed"
-            style={{ display: !isLoading && cameraStarted && !capturedImage ? "block" : "none" }}
-          />
-
-          {isLoading && (
-            <div className="loading-text">SETTING UP CAMERA...</div>
-          )}
-
-          {/* Final Preview (after confirmation) */}
-          {!isLoading && capturedImage && (
-            <div className="preview-box">
-              <img src={capturedImage} alt="Captured Preview" className="preview-image" />
-            </div>
-          )}
-
-          {/* Buttons */}
-          {!isLoading && cameraStarted && !capturedImage && (
-            <div className="camera-controls">
-              <button className="control-btn" onClick={retakeCamera}>RETAKE</button>
-              <button className="control-btn" onClick={capturePhoto}>CAPTURE</button>
-              <button className="control-btn" onClick={toggleCamera}>SWITCH CAM</button>
-              <button className="control-btn" onClick={() => navigate(-1)}>BACK</button>
-            </div>
-          )}
-
-          {!isLoading && capturedImage && (
-            <div className="camera-controls">
-              <button className="control-btn" onClick={retakeCamera}>RETAKE</button>
-              <button className="control-btn" onClick={proceedWithImage}>PROCEED</button>
-              <button className="control-btn" onClick={() => navigate(-1)}>BACK</button>
-            </div>
-          )}
-        </>
+      {!showPrompt && !capturedPhoto && (
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          className="camera-feed"
+          style={{ display: (!isLoading && cameraStarted) ? 'block' : 'none' }}
+        />
       )}
 
-      {/* 🔥 Confirmation Modal */}
-      {showConfirmModal && (
-        <div className="confirmation-modal">
-          <div className="confirm-preview-box">
-            <img src={tempImage} alt="Confirm" />
+      {isLoading && <div className="loading-text">SETTING UP CAMERA...</div>}
+
+      {capturedPhoto && (
+        <div className="capture-preview">
+          <img src={capturedPhoto} alt="Captured" />
+          <div className="camera-controls">
+            <button className="control-btn" onClick={retakeCamera}>Retake</button>
+            <button className="control-btn" onClick={confirmPhoto}>Use</button>
           </div>
-          <p className="confirmation-text">Use this photo?</p>
-          <div className="confirm-buttons">
-            <button className="confirm-btn" onClick={confirmImage}>YES, USE PHOTO</button>
-            <button className="cancel-btn" onClick={retakeCamera}>RETAKE</button>
-          </div>
+        </div>
+      )}
+
+      {!isLoading && cameraStarted && !capturedPhoto && (
+        <div className="camera-controls">
+          <button className="control-btn" onClick={retakeCamera}>Retake</button>
+          <button className="control-btn" onClick={capturePhoto}>Capture</button>
+          <button className="control-btn" onClick={toggleCamera}>Switch Cam</button>
+          <button className="control-btn" onClick={() => navigate(-1)}>Back</button>
         </div>
       )}
     </div>

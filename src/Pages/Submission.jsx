@@ -1,28 +1,43 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Submission = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleGoToDemographics = () => {
-    navigate("/demographics", {
-      state: {
-        name: "Test User", // Replace later with real state
-        location: "New York",
-        nationality: "American",
-        capturedImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...", // Fake base64 placeholder for now
-      },
-    });
+  const [userData, setUserData] = useState({
+    name: "",
+    location: "",
+    nationality: "",
+    capturedImage: null,
+  });
+
+  useEffect(() => {
+    if (location.state) {
+      setUserData({
+        name: location.state.name || "",
+        location: location.state.location || "",
+        nationality: location.state.nationality || "",
+        capturedImage: location.state.capturedImage || null,
+      });
+      console.log("Submission: Received data from previous step:", location.state);
+    } else {
+      console.warn("Submission: No state data received from previous route. Data might be missing.");
+    }
+  }, [location.state]);
+
+  // ✅ Redirect to /image-upload instead of /demographics
+  const handleProceedToImageUpload = () => {
+    console.log("Submission: Navigating to Image Upload with data:", userData);
+    navigate("/image-upload"); // ✅ correct next step
   };
 
   return (
     <div className="introduction-page">
       <div className="diamond-bg"></div>
 
-      {/* TOP LEFT TEXT */}
       <div className="top-left-analysis">TO START ANALYSIS</div>
 
-      {/* BACK BUTTON */}
       <div className="bottom-left-nav" onClick={() => navigate("/nationality")}>
         <div className="diamond small-diamond">
           <span className="arrow">◀</span>
@@ -30,20 +45,13 @@ const Submission = () => {
         <span className="back-text">BACK</span>
       </div>
 
-      {/* CENTERED MESSAGE */}
       <div className="center-input">
         <h1 className="submission-title">Results has been submitted!</h1>
         <p className="submission-subtext">Proceed to the next step</p>
 
-        {/* GO TO IMAGE UPLOAD BUTTON */}
-        <div className="go-to-upload-button" onClick={() => navigate("/image-upload")}>
-          GO TO IMAGE UPLOAD
+        <div className="go-to-upload-button" onClick={handleProceedToImageUpload}>
+          BEGIN IMAGING
         </div>
-
-        {/* 🚨 NEW: GO TO DEMOGRAPHICS TEST BUTTON */}
-        {/* <div className="go-to-upload-button" onClick={handleGoToDemographics}>
-          GO TO DEMOGRAPHICS (TEST)
-        </div> */}
       </div>
     </div>
   );

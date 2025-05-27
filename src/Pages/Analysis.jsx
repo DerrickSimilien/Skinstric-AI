@@ -6,26 +6,39 @@ const Analysis = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [capturedImage, setCapturedImage] = useState(null);
+  const [name, setName] = useState('');
+  const [userLocation, setUserLocation] = useState('');
+  const [nationality, setNationality] = useState('');
 
   useEffect(() => {
-    if (location.state?.capturedImage) {
+    if (location.state) {
       setCapturedImage(location.state.capturedImage);
+      setName(location.state.name || '');
+      setUserLocation(location.state.location || '');
+      setNationality(location.state.nationality || '');
     }
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); // Simulate analysis delay
+    }, 3000); 
 
     return () => clearTimeout(timer);
   }, [location]);
 
   const handleProceed = () => {
-     console.log("proceed clicked");
-    navigate("/analysis-options"); 
+    console.log("proceed clicked");
+    navigate("/demographics", {
+      state: {
+        capturedImage: capturedImage,
+        name: name,
+        location: userLocation,
+        nationality: nationality,
+      },
+    });
   };
 
   const handleBack = () => {
-    navigate(-1); // Go back to the previous screen
+    navigate(-1); 
   };
 
   return (
@@ -38,7 +51,7 @@ const Analysis = () => {
           <>
             <h1 className="ripple-text">Image Analyzed Successfully!</h1>
             <div className="analysis-button-group">
-                <button className="glow-button" onClick={handleProceed}>PROCEED</button>
+              <button className="glow-button" onClick={handleProceed}>PROCEED</button>
               <button className="glow-button" onClick={handleBack}>BACK</button>
             </div>
           </>

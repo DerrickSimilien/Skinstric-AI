@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./Pages/Home";
@@ -15,7 +15,11 @@ import Analysis from './Pages/Analysis';
 import AnalysisOptions from "./Pages/AnalysisOptions";
 import DemographicsSummary from "./Pages/DemographicsSummary";
 
+// ✅ Correct import
+import { BrowserRouter as Router } from "react-router-dom";
+import { UserDataProvider } from "./UserDataContext";
 
+// ✅ Move this inside the Router
 const AppWrapper = () => {
   const location = useLocation();
   const [showNavbar, setShowNavbar] = useState(true);
@@ -52,7 +56,9 @@ const AppWrapper = () => {
 function App() {
   return (
     <Router>
-      <AppWrapper />
+      <UserDataProvider>
+        <AppWrapper />
+      </UserDataProvider>
     </Router>
   );
 }

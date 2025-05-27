@@ -1,19 +1,23 @@
 // ✅ DemographicsSummary.jsx
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../UserDataContext"; // ✅ Import context
 
 const DemographicsSummary = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { userData } = useContext(UserDataContext); // ✅ Access global user data
   const [demographics, setDemographics] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const userData = location.state;
+   useEffect(() => {
+    console.log("👀 Final userData at Demographics:", userData);
+  }, [userData]);
 
   useEffect(() => {
     const fetchDemographics = async () => {
-      if (!userData) {
-        console.error("No user data provided to demographics page.");
+      if (!userData || !userData.name || !userData.location || !userData.nationality || !userData.capturedImage)
+     {
+        console.error("❌ Missing user data for demographics analysis.");
         setLoading(false);
         return;
       }

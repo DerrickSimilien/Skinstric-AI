@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../UserDataContext";
 
 const Introduction = () => {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
+  const { userData, setUserData } = useContext(UserDataContext);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -11,7 +13,7 @@ const Introduction = () => {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      localStorage.setItem("name", inputValue); // ✅ Save to localStorage
+      setUserData({ ...userData, name: inputValue }); // ✅ Save to localStorage
       navigate("/location"); // ✅ Move to next question page
     }
   };

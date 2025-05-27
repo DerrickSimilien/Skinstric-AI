@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../UserDataContext"; // ✅ Import context
 
 const Nationality = () => {
   const [inputValue, setInputValue] = useState("");
   const navigate = useNavigate();
+  const { userData, setUserData } = useContext(UserDataContext); // ✅ Get context
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -11,8 +13,8 @@ const Nationality = () => {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      localStorage.setItem("nationality", inputValue); // ✅ Save nationality
-      navigate("/loading"); // ❗Replace this with your actual next step later
+      setUserData({ ...userData, nationality: inputValue }); // ✅ Save to context
+      navigate("/loading"); // ❗ Or wherever you go next
     }
   };
 
