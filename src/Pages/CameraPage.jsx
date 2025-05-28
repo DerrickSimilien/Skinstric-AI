@@ -86,10 +86,13 @@ const CameraPage = () => {
             <button className="deny-btn" onClick={() => navigate("/camera-error")}>
               DENY
             </button>
-            <button className="allow-btn" onClick={() => {
-              setShowPrompt(false);
-              setIsLoading(true);
-            }}>
+            <button
+              className="allow-btn"
+              onClick={() => {
+                setShowPrompt(false);
+                setIsLoading(true);
+              }}
+            >
               ALLOW
             </button>
           </div>
@@ -97,13 +100,29 @@ const CameraPage = () => {
       )}
 
       {!showPrompt && !capturedPhoto && (
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          className="camera-feed"
-          style={{ display: (!isLoading && cameraStarted) ? 'block' : 'none' }}
-        />
+        <div className="camera-feed-wrapper">
+          <div className="camera-feed-container">
+            <video
+              ref={videoRef}
+              autoPlay
+              playsInline
+              className="camera-feed"
+              style={{
+                display: !isLoading && cameraStarted ? "block" : "none",
+              }}
+            />
+            {cameraStarted && (
+              <div className="camera-tips-inside-feed">
+                <p className="tip-heading">TO GET BETTER RESULTS MAKE SURE TO HAVE</p>
+                <div className="tip-icons">
+                  <span>◇ NEUTRAL EXPRESSION</span>
+                  <span>◇ FRONTAL POSE</span>
+                  <span>◇ ADEQUATE LIGHTING</span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       )}
 
       {isLoading && <div className="loading-text">SETTING UP CAMERA...</div>}

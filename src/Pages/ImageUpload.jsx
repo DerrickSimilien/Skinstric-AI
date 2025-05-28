@@ -52,7 +52,7 @@ const ImageUpload = () => {
   };
 
   const goToAnalysis = () => {
-    navigate("/analysis");
+    navigate("/demographics");
   };
 
   return (
