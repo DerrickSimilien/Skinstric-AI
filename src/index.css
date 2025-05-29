@@ -1564,8 +1564,8 @@ button:focus-visible {
 }
 
 .ao-diamond:hover {
-  background-color: #ff69b4;
-  box-shadow: 0 0 15px #ff69b4, 0 0 30px #ff69b4;
+  background-color: #999;
+  box-shadow: 0 0 15px #999, 0 0 30px #999;
   color: white;
   transform: rotate(45deg) scale(1.05);
   animation: pulse 0.6s ease-in-out infinite alternate;
@@ -1665,10 +1665,10 @@ button:focus-visible {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  border: 2px solid #ff69b4;
+ border: 2px solid #999;
   border-radius: 4px;
   opacity: 0;
-  box-shadow: 0 0 15px #ff69b4;
+  box-shadow: 0 0 15px #999;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
@@ -2162,6 +2162,108 @@ button:focus-visible {
     font-size: 1rem;
     padding: 12px;
   }
+
+  
+}
+
+/* 📱 Responsive Fix for AnalysisOptions.jsx */
+@media screen and (max-width: 600px) {
+  .ao-top-left {
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    z-index: 10;
+    display: block;
+    max-width: 80%;
+    color: black;
+  }
+
+  .ao-heading {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+    .ao-subtext {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .ao-diamond-chart-wrapper {
+    width: 280px;
+    height: 280px;
+    top: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+    .ao-diamond-grid {
+    width: 140px;
+    height: 140px;
+    position: relative;
+  }
+
+   .ao-diamond {
+    width: 90px;
+    height: 90px;
+    padding: 6px;
+  }
+
+    .ao-top {
+    top: -60px;
+    left: 25px;
+  }
+
+  .ao-left {
+    top: 25px;
+    left: -60px;
+  }
+
+  .ao-right {
+    top: 25px;
+    left: 115px;
+  }
+
+  .ao-bottom {
+    top: 115px;
+    left: 25px;
+  }
+
+  .ao-label {
+    font-size: 10px;
+  }
+
+  .ao-outline-1 { width: 280px; height: 280px; }
+  .ao-outline-2 { width: 320px; height: 320px; }
+  .ao-outline-3 { width: 360px; height: 360px; }
+  .ao-outline-4 { width: 400px; height: 400px; }
+
+  .ao-back-btn,
+  .ao-proceed-btn {
+    bottom: 20px;
+  }
+
+  .ao-back-text,
+  .ao-proceed-text {
+    font-size: 10px;
+  }
+
+  .ao-small-diamond {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ao-arrow {
+    font-size: 12px;
+  }
+
+    .ao-outline-1 { width: 280px; height: 280px; }
+  .ao-outline-2 { width: 320px; height: 320px; }
+  .ao-outline-3 { width: 360px; height: 360px; }
+  .ao-outline-4 { width: 400px; height: 400px; }
+
+
 }
 
 

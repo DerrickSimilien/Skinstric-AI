@@ -2,18 +2,22 @@ import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../UserDataContext";
 
+// Helper function to find top prediction
+const getTopPrediction = (obj, label = "unknown") => {
+  if (!obj || typeof obj !== "object") {
+    console.warn(`⚠️ No prediction data for ${label}`);
+    return { label: "N/A", confidence: 0 };
+  }
+  const top = Object.entries(obj).sort((a, b) => b[1] - a[1])[0];
+  return { label: top[0], confidence: Math.round(top[1] * 100) };
+};
+
 const DemographicsSummary = () => {
   const navigate = useNavigate();
   const { userData } = useContext(UserDataContext);
   const [demographics, setDemographics] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Debug: Log the userData
-  useEffect(() => {
-    console.log("👀 Final userData at Demographics:\n", JSON.stringify(userData, null, 2));
-  }, [userData]);
-
-  // ✅ Redirect if required data is missing
   useEffect(() => {
     if (
       !userData.name ||
@@ -26,20 +30,8 @@ const DemographicsSummary = () => {
     }
   }, [userData, navigate]);
 
-  // ✅ Fetch AI demographics if data is complete
   useEffect(() => {
     const fetchDemographics = async () => {
-      if (
-        !userData ||
-        !userData.name ||
-        !userData.location ||
-        !userData.nationality ||
-        !userData.capturedImage
-      ) {
-        setLoading(false);
-        return;
-      }
-
       try {
         const phaseOneRes = await fetch(
           "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne",
@@ -69,10 +61,11 @@ const DemographicsSummary = () => {
         );
 
         const phaseTwoData = await phaseTwoRes.json();
-        setDemographics(phaseTwoData);
+        console.log("🧪 Final demographics from API:", phaseTwoData.data); // ADD THIS
+        setDemographics(phaseTwoData.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching A.I. results:", error);
+        console.error("❌ Error fetching A.I. results:", error);
         setLoading(false);
       }
     };
@@ -80,7 +73,6 @@ const DemographicsSummary = () => {
     fetchDemographics();
   }, [userData]);
 
-  // 🌀 Loading state
   if (loading) {
     return (
       <div className="loading-screen">
@@ -89,7 +81,6 @@ const DemographicsSummary = () => {
     );
   }
 
-  // ⚠️ If API fails
   if (!demographics) {
     return (
       <div className="loading-screen">
@@ -98,7 +89,13 @@ const DemographicsSummary = () => {
     );
   }
 
-  // ✅ Final UI
+  // 🌟 Use correct keys based on actual API
+  const race = getTopPrediction(demographics.race, "race");
+  const gender = getTopPrediction(demographics.gender, "gender");
+
+  // 👇 This is flexible — you can change "ageRange" to "age" if needed
+  const age = getTopPrediction(demographics.ageRange || demographics.age, "age");
+
   return (
     <div className="summary-wrapper">
       <header className="summary-header">
@@ -111,15 +108,15 @@ const DemographicsSummary = () => {
         {/* LEFT COLUMN */}
         <div className="summary-left">
           <div className="summary-box">
-            <div className="value">{demographics?.race || "N/A"}</div>
+            <div className="value">{race.label}</div>
             <div className="label">RACE</div>
           </div>
           <div className="summary-box">
-            <div className="value">{demographics?.ageRange || "N/A"}</div>
+            <div className="value">{age.label}</div>
             <div className="label">AGE</div>
           </div>
           <div className="summary-box">
-            <div className="value">{demographics?.gender || "N/A"}</div>
+            <div className="value">{gender.label}</div>
             <div className="label">SEX</div>
           </div>
           <button className="btn back-btn" onClick={() => navigate(-1)}>
@@ -129,10 +126,10 @@ const DemographicsSummary = () => {
 
         {/* CENTER */}
         <div className="summary-center">
-          <div className="main-prediction">{demographics?.race}</div>
+          <div className="main-prediction">{race.label}</div>
           <div className="circle-container">
             <div className="circle">
-              <div className="percentage">{demographics?.confidence || 0}%</div>
+              <div className="percentage">{race.confidence}%</div>
             </div>
           </div>
         </div>
@@ -144,17 +141,16 @@ const DemographicsSummary = () => {
             <span>A.I. CONFIDENCE</span>
           </div>
           <ul className="confidence-list">
-            {demographics?.confidenceBreakdown?.map((item, index) => (
-              <li
-                key={index}
-                className={`confidence-item ${
-                  item.label === demographics?.race ? "active" : ""
-                }`}
-              >
-                <span>◇ {item.label}</span>
-                <span>{item.confidence}%</span>
-              </li>
-            ))}
+            {demographics?.race &&
+              Object.entries(demographics.race).map(([label, value]) => (
+                <li
+                  key={label}
+                  className={`confidence-item ${label === race.label ? "active" : ""}`}
+                >
+                  <span>◇ {label}</span>
+                  <span>{Math.round(value * 100)}%</span>
+                </li>
+              ))}
           </ul>
           <div className="btn-row">
             <button className="btn reset-btn" onClick={() => window.location.reload()}>

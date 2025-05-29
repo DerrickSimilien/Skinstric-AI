@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Analysis = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
   const [loading, setLoading] = useState(true);
   const [capturedImage, setCapturedImage] = useState(null);
   const [name, setName] = useState('');
@@ -20,25 +21,26 @@ const Analysis = () => {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 3000); 
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [location]);
 
   const handleProceed = () => {
-    console.log("proceed clicked");
-    navigate("/demographics", {
+    console.log("✅ Proceeding to diamond grid...");
+
+    navigate("/analysis-options", {
       state: {
-        capturedImage: capturedImage,
-        name: name,
+        capturedImage,
+        name,
         location: userLocation,
-        nationality: nationality,
+        nationality,
       },
     });
   };
 
   const handleBack = () => {
-    navigate(-1); 
+    navigate(-1);
   };
 
   return (
@@ -51,8 +53,12 @@ const Analysis = () => {
           <>
             <h1 className="ripple-text">Image Analyzed Successfully!</h1>
             <div className="analysis-button-group">
-              <button className="glow-button" onClick={handleProceed}>PROCEED</button>
-              <button className="glow-button" onClick={handleBack}>BACK</button>
+              <button className="glow-button" onClick={handleProceed}>
+                PROCEED
+              </button>
+              <button className="glow-button" onClick={handleBack}>
+                BACK
+              </button>
             </div>
           </>
         )}
