@@ -75,8 +75,9 @@ const ImageUpload = () => {
       <div className="image-options-wrapper">
         {/* Camera Section */}
         <div className="image-option left-icon">
-          <div className="spinning-square square-1"></div>
-          <div className="spinning-square square-2"></div>
+          <div className="spinning-square square-small"></div>
+          <div className="spinning-square square-medium"></div>
+          <div className="spinning-square square-large"></div>
           <div className="icon-wrapper">
             <div className="label-heading no-glow">
               ALLOW A.I.<br />TO SCAN YOUR FACE
@@ -92,8 +93,9 @@ const ImageUpload = () => {
 
         {/* Gallery Section */}
         <div className="image-option right-icon">
-          <div className="spinning-square square-1"></div>
-          <div className="spinning-square square-2"></div>
+          <div className="spinning-square square-small"></div>
+          <div className="spinning-square square-medium"></div>
+          <div className="spinning-square square-large"></div>
           <div className="icon-wrapper" onClick={() => fileInputRef.current.click()}>
             <div className="label-heading no-glow">
               ALLOW A.I.<br />ACCESS GALLERY

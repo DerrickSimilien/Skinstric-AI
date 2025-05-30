@@ -17,6 +17,7 @@ const DemographicsSummary = () => {
   const { userData } = useContext(UserDataContext);
   const [demographics, setDemographics] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState("race");
 
   useEffect(() => {
     if (
@@ -61,7 +62,7 @@ const DemographicsSummary = () => {
         );
 
         const phaseTwoData = await phaseTwoRes.json();
-        console.log("🧪 Final demographics from API:", phaseTwoData.data); // ADD THIS
+        console.log("🧪 Final demographics from API:", phaseTwoData.data);
         setDemographics(phaseTwoData.data);
         setLoading(false);
       } catch (error) {
@@ -89,12 +90,14 @@ const DemographicsSummary = () => {
     );
   }
 
-  // 🌟 Use correct keys based on actual API
-  const race = getTopPrediction(demographics.race, "race");
-  const gender = getTopPrediction(demographics.gender, "gender");
+  const categories = {
+    race: { label: "RACE", data: demographics.race },
+    age: { label: "AGE", data: demographics.ageRange || demographics.age },
+    gender: { label: "SEX", data: demographics.gender },
+  };
 
-  // 👇 This is flexible — you can change "ageRange" to "age" if needed
-  const age = getTopPrediction(demographics.ageRange || demographics.age, "age");
+  const currentData = categories[activeCategory].data;
+  const currentTop = getTopPrediction(currentData, activeCategory);
 
   return (
     <div className="summary-wrapper">
@@ -107,45 +110,66 @@ const DemographicsSummary = () => {
       <div className="summary-grid">
         {/* LEFT COLUMN */}
         <div className="summary-left">
-          <div className="summary-box">
-            <div className="value">{race.label}</div>
-            <div className="label">RACE</div>
-          </div>
-          <div className="summary-box">
-            <div className="value">{age.label}</div>
-            <div className="label">AGE</div>
-          </div>
-          <div className="summary-box">
-            <div className="value">{gender.label}</div>
-            <div className="label">SEX</div>
-          </div>
+          {Object.entries(categories).map(([key, value]) => (
+            <div
+              key={key}
+              className={`summary-box boxed ${activeCategory === key ? "active" : ""}`}
+              onClick={() => setActiveCategory(key)}
+            >
+              <div className="value">{getTopPrediction(value.data, key).label}</div>
+              <div className="label">{value.label}</div>
+            </div>
+          ))}
           <button className="btn back-btn" onClick={() => navigate(-1)}>
             ◀ BACK
           </button>
         </div>
 
-        {/* CENTER */}
-        <div className="summary-center">
-          <div className="main-prediction">{race.label}</div>
-          <div className="circle-container">
-            <div className="circle">
-              <div className="percentage">{race.confidence}%</div>
-            </div>
+        {/* CENTER SECTION */}
+        <div className="summary-center boxed">
+          <div className="main-prediction">{currentTop.label}</div>
+          <div className="progress-ring">
+            <svg className="ring" width="120" height="120">
+              <circle
+                className="ring-background"
+                stroke="#e6e6e6"
+                strokeWidth="10"
+                fill="transparent"
+                r="50"
+                cx="60"
+                cy="60"
+              />
+              <circle
+                className="ring-progress"
+                stroke="black"
+                strokeWidth="10"
+                fill="transparent"
+                r="50"
+                cx="60"
+                cy="60"
+                strokeDasharray="314"
+                strokeDashoffset={314 - (currentTop.confidence / 100) * 314}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="percentage-text">{currentTop.confidence}%</div>
           </div>
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="summary-right">
+        <div className="summary-right boxed">
           <div className="confidence-header">
-            <span>RACE</span>
+            <span>{categories[activeCategory].label}</span>
             <span>A.I. CONFIDENCE</span>
           </div>
           <ul className="confidence-list">
-            {demographics?.race &&
-              Object.entries(demographics.race).map(([label, value]) => (
+            {currentData &&
+              Object.entries(currentData).map(([label, value]) => (
                 <li
                   key={label}
-                  className={`confidence-item ${label === race.label ? "active" : ""}`}
+                  className={`confidence-item ${
+                    label === currentTop.label ? "active" : ""
+                  }`}
                 >
                   <span>◇ {label}</span>
                   <span>{Math.round(value * 100)}%</span>
