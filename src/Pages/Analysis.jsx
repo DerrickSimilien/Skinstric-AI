@@ -1,68 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Analysis = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(true);
-  const [capturedImage, setCapturedImage] = useState(null);
-  const [name, setName] = useState('');
-  const [userLocation, setUserLocation] = useState('');
-  const [nationality, setNationality] = useState('');
+  const { capturedImage, name, location: userLocation, nationality } = location.state || {};
 
   useEffect(() => {
-    if (location.state) {
-      setCapturedImage(location.state.capturedImage);
-      setName(location.state.name || '');
-      setUserLocation(location.state.location || '');
-      setNationality(location.state.nationality || '');
-    }
-
     const timer = setTimeout(() => {
-      setLoading(false);
+      navigate("/analysis-options", {
+        state: {
+          capturedImage,
+          name,
+          location: userLocation,
+          nationality,
+        },
+      });
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [location]);
-
-  const handleProceed = () => {
-    console.log("✅ Proceeding to diamond grid...");
-
-    navigate("/analysis-options", {
-      state: {
-        capturedImage,
-        name,
-        location: userLocation,
-        nationality,
-      },
-    });
-  };
-
-  const handleBack = () => {
-    navigate(-1);
-  };
+  }, [navigate, capturedImage, name, userLocation, nationality]);
 
   return (
-    <div className="camera-page">
-      <div className="diamond-bg"></div>
-      <div className="center-content">
-        {loading ? (
-          <h1 className="ripple-text">PREPARING YOUR ANALYSIS...</h1>
-        ) : (
-          <>
-            <h1 className="ripple-text">Image Analyzed Successfully!</h1>
-            <div className="analysis-button-group">
-              <button className="glow-button" onClick={handleProceed}>
-                PROCEED
-              </button>
-              <button className="glow-button" onClick={handleBack}>
-                BACK
-              </button>
-            </div>
-          </>
-        )}
-      </div>
+    <div className="analysis-white-page">
+      <div className="spinning-square square-large"></div>
+      <div className="spinning-square square-medium"></div>
+      <div className="spinning-square square-small"></div>
+      <div className="analysis-loading-text">PREPARING YOUR ANALYSIS ...</div>
     </div>
   );
 };

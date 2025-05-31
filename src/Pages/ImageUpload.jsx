@@ -9,6 +9,8 @@ const ImageUpload = () => {
   const [capturedImage, setCapturedImage] = useState(null);
   const [tempImage, setTempImage] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showCameraModal, setShowCameraModal] = useState(false);
+  const [cameraClicked, setCameraClicked] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -55,6 +57,11 @@ const ImageUpload = () => {
     navigate("/analysis");
   };
 
+  const handleAllowCamera = () => {
+    setShowCameraModal(false);
+    navigate("/camera", { state: { autoStart: true } }); // ✅ pass intent to skip second modal
+  };
+
   return (
     <div className="introduction-page">
       <div className="diamond-bg"></div>
@@ -86,13 +93,16 @@ const ImageUpload = () => {
               src="/Camera.png"
               alt="Camera"
               className="icon-img"
-              onClick={() => navigate("/camera")}
+              onClick={() => {
+                setCameraClicked(true);
+                setShowCameraModal(true);
+              }}
             />
           </div>
         </div>
 
         {/* Gallery Section */}
-        <div className="image-option right-icon">
+        <div className={`image-option right-icon ${cameraClicked ? "faded" : ""}`}>
           <div className="spinning-square square-small"></div>
           <div className="spinning-square square-medium"></div>
           <div className="spinning-square square-large"></div>
@@ -120,12 +130,20 @@ const ImageUpload = () => {
             <img src={tempImage} alt="Confirm Preview" />
           </div>
           <div className="confirm-buttons">
-            <button className="confirm-btn" onClick={confirmImage}>
-              Yes
-            </button>
-            <button className="cancel-btn" onClick={cancelImage}>
-              No
-            </button>
+            <button className="confirm-btn" onClick={confirmImage}>Yes</button>
+            <button className="cancel-btn" onClick={cancelImage}>No</button>
+          </div>
+        </div>
+      )}
+
+      {/* Camera Permission Modal */}
+      {showCameraModal && (
+        <div className="camera-permission-modal">
+          <p className="modal-title">ALLOW A.I. TO ACCESS YOUR CAMERA</p>
+          <div className="modal-divider"></div>
+          <div className="modal-buttons">
+            <button className="deny-btn" onClick={() => setShowCameraModal(false)}>DENY</button>
+            <button className="allow-btn" onClick={handleAllowCamera}>ALLOW</button>
           </div>
         </div>
       )}
@@ -148,7 +166,7 @@ const ImageUpload = () => {
         )}
       </div>
 
-      {/* ✅ Proceed Button now correctly positioned */}
+      {/* Proceed Button */}
       {capturedImage && (
         <div className="bottom-right-nav" onClick={goToAnalysis}>
           <span className="proceed-text">PROCEED</span>

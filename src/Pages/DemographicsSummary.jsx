@@ -18,6 +18,7 @@ const DemographicsSummary = () => {
   const [demographics, setDemographics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("race");
+  const [selectedLabel, setSelectedLabel] = useState(null);
 
   useEffect(() => {
     if (
@@ -67,20 +68,22 @@ const DemographicsSummary = () => {
         setLoading(false);
       } catch (error) {
         console.error("❌ Error fetching A.I. results:", error);
-        setLoading(false);
+        setTimeout(() => {
+  setLoading(false);
+}, 7000); 
       }
     };
 
     fetchDemographics();
   }, [userData]);
 
-  if (loading) {
-    return (
-      <div className="loading-screen">
-        <h1 className="ripple-text">ANALYZING YOUR RESULTS...</h1>
-      </div>
-    );
-  }
+ if (loading) {
+  return (
+    <div className="loading-screen2">
+      <div className="spinner2"></div>
+    </div>
+  );
+}
 
   if (!demographics) {
     return (
@@ -97,7 +100,9 @@ const DemographicsSummary = () => {
   };
 
   const currentData = categories[activeCategory].data;
-  const currentTop = getTopPrediction(currentData, activeCategory);
+  const currentTop = selectedLabel
+    ? { label: selectedLabel, confidence: Math.round(currentData[selectedLabel] * 100) }
+    : getTopPrediction(currentData, activeCategory);
 
   return (
     <div className="summary-wrapper">
@@ -114,15 +119,15 @@ const DemographicsSummary = () => {
             <div
               key={key}
               className={`summary-box boxed ${activeCategory === key ? "active" : ""}`}
-              onClick={() => setActiveCategory(key)}
+              onClick={() => {
+                setActiveCategory(key);
+                setSelectedLabel(null);
+              }}
             >
               <div className="value">{getTopPrediction(value.data, key).label}</div>
               <div className="label">{value.label}</div>
             </div>
           ))}
-          <button className="btn back-btn" onClick={() => navigate(-1)}>
-            ◀ BACK
-          </button>
         </div>
 
         {/* CENTER SECTION */}
@@ -167,22 +172,32 @@ const DemographicsSummary = () => {
               Object.entries(currentData).map(([label, value]) => (
                 <li
                   key={label}
-                  className={`confidence-item ${
-                    label === currentTop.label ? "active" : ""
-                  }`}
+                  className={`confidence-item ${label === currentTop.label ? "active" : ""}`}
+                  onClick={() => setSelectedLabel(label)}
+                  style={{ cursor: "pointer" }}
                 >
                   <span>◇ {label}</span>
                   <span>{Math.round(value * 100)}%</span>
                 </li>
               ))}
           </ul>
-          <div className="btn-row">
-            <button className="btn reset-btn" onClick={() => window.location.reload()}>
-              RESET
-            </button>
-            <button className="btn confirm-btn">CONFIRM</button>
-          </div>
         </div>
+      </div>
+
+      {/* FIXED BOTTOM LEFT BACK BUTTON */}
+      <button className="demographics-back-btn fixed-bottom-left" onClick={() => navigate(-1)}>
+        <div className="diamond">
+          <span className="arrow">◀</span>
+        </div>
+        <span className="back-text">BACK</span>
+      </button>
+
+      {/* FIXED BOTTOM RIGHT FOOTER BUTTONS */}
+      <div className="demographics-footer-buttons">
+        <button className="demographics-btn" onClick={() => window.location.reload()}>
+          RESET
+        </button>
+        <button className="demographics-btn">CONFIRM</button>
       </div>
     </div>
   );

@@ -607,6 +607,11 @@ button:focus-visible {
   z-index: 1;
 }
 
+.faded {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 
 .floating-label-wrapper {
   position: absolute;
@@ -756,12 +761,33 @@ button:focus-visible {
 
 .camera-page {
   position: relative;
+  width: 100vw;
   height: 100vh;
-  background: #111;
+  background: black;
+  overflow: hidden;
+}
+
+.camera-page .navbar {
+  display: none; /* ✅ removes the default white nav bar */
+}
+
+.camera-custom-top-text {
+    position: absolute;
+  top: 20px;
+  left: 24px;
+  z-index: 100;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  gap: 8px;
+}
+
+.camera-custom-top-text .intro-label {
+  color: #bbb;
 }
 
 .capture-preview {
@@ -823,53 +849,65 @@ button:focus-visible {
 }
 
 .camera-permission-modal {
-  background: #111;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #111;
+  padding: 24px 32px;
+  width: 320px;
+  border-radius: 0;
+  box-shadow: 0 0 24px rgba(255, 20, 147, 0.3);
+  text-align: left;
   color: white;
-  border: 1px solid #333;
-  padding: 40px;
-  max-width: 400px;
-  text-align: center;
-  margin: 0 auto;
-  border-radius: 2px;
-  box-shadow: 0 0 30px rgba(255, 20, 147, 0.4);
+  z-index: 999;
   font-family: 'Raleway', sans-serif;
 }
 
 .modal-title {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
-  margin-bottom: 20px;
   color: white;
-  letter-spacing: 1px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.modal-divider {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  opacity: 0.3;
+  margin: 20px 0; /* spacing above and below */
 }
 
 .modal-buttons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-top: 16px;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 
 .deny-btn,
 .allow-btn {
-  min-width: 100px; /* 👈 helps keep consistent spacing */
-  text-align: center;
+  flex: 1;
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: none;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .allow-btn {
-  cursor: pointer !important;
-  z-index: 1000 !important;
-  position: relative;
+  background-color: #ff1493;
+  color: white;
 }
 
 .deny-btn {
-   cursor: pointer !important;
-  z-index: 1000 !important;
-  position: relative;
+  background-color: #222;
+  color: #777;
 }
 
 .deny-btn {
@@ -883,9 +921,8 @@ button:focus-visible {
 }
 
 .allow-btn:hover {
-  background-color: #ff1493;
+  background-color: #888;
   color: white;
-  border-color: #ff1493;
 }
 
 .camera-controls {
@@ -951,18 +988,70 @@ button:focus-visible {
 }
 
 .camera-feed-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 100vw;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
 }
 
 .camera-feed-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  width: 100%;
+}
+
+.floating-capture-icon {
+  position: absolute;
+  bottom: 90px;
+  right: 30px;
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  z-index: 999;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+  transition: transform 0.2s ease;
+}
+
+.camera-label-text {
+  font-size: 10px;
+  color: white;
+  margin-right: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+}
+.camera-icon-img {
+  width: 28px;         /* ⬅️ Reduced from 30px */
+  height: 28px;
+  object-fit: contain;
+  filter: none;
+  transition: transform 0.2s ease;
+}
+
+.camera-icon-circle {
+  width: 48px;
+  height: 48px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* subtle glow like OG */
+}
+
+.floating-capture-icon:hover .camera-icon-img {
+  transform: scale(1.1);
+}
+
+.camera-feed {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
 
 /* .camera-tips-overlay {
@@ -1183,65 +1272,31 @@ button:focus-visible {
 
 /*ANALYSIS PAGE */
 
-.ripple-text {
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center;
-  animation: ripple 1.5s infinite ease-in-out;
-  color: black;
+.analysis-white-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
 }
 
-
-.ripple-text span {
-  animation: ripple 1.4s infinite;
-  color: #ff1493;
-}
-
-.ripple-text span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.ripple-text span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes ripple {
-  0%, 100% {
-    color: black;
-  }
-  50% {
-    color: #ff00ff;
-  }
-}
-
-.glow-button {
-  background-color: transparent;
-  border: 2px solid #ff69b4;
-  color: #ff69b4;
-  padding: 12px 28px;
-  font-size: 18px;
+.analysis-loading-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
   font-weight: 600;
-  border-radius: 8px;
-  margin: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 10px #ff69b4;
+  color: black;
+  z-index: 10;
+  text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.glow-button:hover {
-  background-color: #ff69b4;
-  color: #ffffff;
-  text-shadow: 0 0 10px white, 0 0 20px white;
-  transform: scale(1.08);
-  box-shadow: 0 0 15px #ff69b4, 0 0 30px #ff69b4;
-}
-
-.analysis-button-group {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-}
 
 
 /* CAMERA SETUP */
@@ -1311,6 +1366,30 @@ button:focus-visible {
   animation: spinCamera 2s linear infinite;
 }
 
+/* Removes default top-left camera buttons */
+.camera-controls {
+  display: none !important;
+}
+
+/* Floating camera icon (right side middle) */
+.floating-capture-icon {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  font-size: 2.6rem;
+  color: white;
+  cursor: pointer;
+  z-index: 999;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+  transition: transform 0.2s ease;
+}
+
+.floating-capture-icon:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+
 /*   DEMOGRAPHICS PAGE STYLING  */
 
 .summary-wrapper {
@@ -1327,6 +1406,10 @@ button:focus-visible {
   margin-bottom: 2rem;
   padding: 40px 60px 20px;
   text-align: left;
+}
+
+.confidence-item {
+  cursor: pointer;
 }
 
 .section-label {
@@ -1506,6 +1589,96 @@ button:focus-visible {
   font-weight: bold;
 }
 
+/* FLOATING BACK BUTTON (bottom left like OG) */
+.fixed-bottom-left {
+  position: fixed;
+  bottom: 32px;
+  left: 40px;
+  z-index: 999;
+}
+
+/* RESET & CONFIRM fixed bottom right */
+.demographics-footer-buttons {
+  margin-top: 60px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+/* 🌟 Match OG DEMOGRAPHICS BUTTON STYLE */
+.demographics-btn {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 10px 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-radius: 0;
+  transition: background 0.2s ease;
+}
+
+.demographics-btn:hover {
+  background: black;
+  color: white;
+}
+
+/* 🔙 Special style for BACK button like other pages */
+.demographics-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: none;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
+
+.demographics-back-btn .diamond {
+  width: 28px;
+  height: 28px;
+  border: 1px solid black;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.demographics-back-btn .arrow {
+  transform: rotate(-45deg);
+  font-size: 14px;
+}
+
+.demographics-back-btn .back-text {
+  margin-left: 6px;
+}
+
+.loading-screen2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white; /* or match your site’s background */
+}
+
+.spinner2 {
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid black; /* Or your primary color */
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 
 /* =====================================
@@ -2128,6 +2301,12 @@ button:focus-visible {
     font-size: 1rem;
     text-transform: uppercase;
     color: #666;
+  }
+
+   .fixed-bottom-left {
+    position: static !important;
+    margin-top: 2rem;
+    margin-left: 1rem;
   }
 
   .summary-left,
