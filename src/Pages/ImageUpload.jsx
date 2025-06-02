@@ -6,7 +6,7 @@ const ImageUpload = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { userData, setUserData } = useContext(UserDataContext);
-  const [capturedImage, setCapturedImage] = useState(null);
+  const [capturedImage, setCapturedImage] = useState(userData?.capturedImage || null);
   const [tempImage, setTempImage] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showCameraModal, setShowCameraModal] = useState(false);
@@ -14,14 +14,16 @@ const ImageUpload = () => {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    if (location.state?.capturedImage) {
-      setCapturedImage(location.state.capturedImage);
-      setUserData((prev) => ({
-        ...prev,
-        capturedImage: location.state.capturedImage,
-      }));
-    }
-  }, [location, setUserData]);
+  if (location.state?.capturedImage) {
+    setCapturedImage(location.state.capturedImage);
+    setUserData((prev) => ({
+      ...prev,
+      capturedImage: location.state.capturedImage,
+    }));
+  } else if (!location.state?.capturedImage && userData?.capturedImage) {
+    setCapturedImage(userData.capturedImage);
+  }
+}, [location.state?.capturedImage, setUserData]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -59,7 +61,7 @@ const ImageUpload = () => {
 
   const handleAllowCamera = () => {
     setShowCameraModal(false);
-    navigate("/camera", { state: { autoStart: true } }); // ✅ pass intent to skip second modal
+    navigate("/camera", { state: { autoStart: true } });
   };
 
   return (
@@ -82,24 +84,27 @@ const ImageUpload = () => {
       <div className="image-options-wrapper">
         {/* Camera Section */}
         <div className="image-option left-icon">
-          <div className="spinning-square square-small"></div>
-          <div className="spinning-square square-medium"></div>
-          <div className="spinning-square square-large"></div>
-          <div className="icon-wrapper">
-            <div className="label-heading no-glow">
-              ALLOW A.I.<br />TO SCAN YOUR FACE
-            </div>
-            <img
-              src="/Camera.png"
-              alt="Camera"
-              className="icon-img"
-              onClick={() => {
-                setCameraClicked(true);
-                setShowCameraModal(true);
-              }}
-            />
-          </div>
-        </div>
+  <div className="camera-block"> {/* ✅ NEW WRAPPER */}
+    <div className="spinning-square square-small"></div>
+    <div className="spinning-square square-medium"></div>
+    <div className="spinning-square square-large"></div>
+    <div className="icon-wrapper">
+      <img
+        src="/Camera.png"
+        alt="Camera"
+        className="icon-img"
+        onClick={() => {
+          setCameraClicked(true);
+          setShowCameraModal(true);
+        }}
+      />
+      <div className="line-to-icon-camera" />
+      <div className="label-heading-camera">
+        ALLOW A.I.<br />TO SCAN YOUR FACE
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Gallery Section */}
         <div className={`image-option right-icon ${cameraClicked ? "faded" : ""}`}>
@@ -107,7 +112,8 @@ const ImageUpload = () => {
           <div className="spinning-square square-medium"></div>
           <div className="spinning-square square-large"></div>
           <div className="icon-wrapper" onClick={() => fileInputRef.current.click()}>
-            <div className="label-heading no-glow">
+            <div className="line-to-icon-gallery" />
+            <div className="label-heading-gallery">
               ALLOW A.I.<br />ACCESS GALLERY
             </div>
             <img src="/image-gallery.png" alt="Gallery" className="icon-img" />
@@ -121,6 +127,13 @@ const ImageUpload = () => {
           />
         </div>
       </div>
+
+      {/* Show instruction if no image is chosen yet */}
+      {!capturedImage && !showConfirm && !showCameraModal && (
+        <div style={{ textAlign: "center", marginTop: "2rem", color: "#888", fontSize: "14px" }}>
+          Please upload an image or allow camera access to continue.
+        </div>
+      )}
 
       {/* Confirmation Modal */}
       {showConfirm && tempImage && (
@@ -147,24 +160,6 @@ const ImageUpload = () => {
           </div>
         </div>
       )}
-
-      {/* Preview Section */}
-      <div className="preview-section">
-        <p className="preview-title">Preview</p>
-        <div className="preview-box">
-          {capturedImage ? (
-            <img src={capturedImage} alt="Captured Preview" className="preview-image" />
-          ) : (
-            <p className="preview-placeholder">No image selected</p>
-          )}
-        </div>
-
-        {capturedImage && (
-          <button className="remove-btn" onClick={removeImage}>
-            Remove Photo
-          </button>
-        )}
-      </div>
 
       {/* Proceed Button */}
       {capturedImage && (

@@ -64,7 +64,7 @@ const AnalysisOptions = () => {
       </div>
 
       {/* Back Button */}
-      <div className="ao-back-btn" onClick={() => navigate(-1)}>
+      <div className="ao-back-btn" onClick={() => navigate("/image-upload")}>
         <div className="ao-small-diamond">
           <span className="ao-arrow">◀</span>
         </div>
