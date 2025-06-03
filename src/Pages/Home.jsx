@@ -8,12 +8,23 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      {/* GIANT DIAMOND BRACKETS (left & right background diamonds) */}
+      <div className="home-left-bracket">
+        <div className="home-bracket-diamond"></div>
+      </div>
+      <div className="home-right-bracket">
+        <div className="home-bracket-diamond"></div>
+      </div>
+
+      {/* Floating animated diamond stack in center */}
       <DiamondTrio />
 
       {/* Left side button */}
-      <div 
-        className={`side-button left ${hoverState === 'right' ? 'fade-out' : ''}`}
-        onMouseEnter={() => setHoverState('left')}
+      <div
+        className={`side-button left ${
+          hoverState === "right" ? "fade-out" : ""
+        }`}
+        onMouseEnter={() => setHoverState("left")}
         onMouseLeave={() => setHoverState(null)}
       >
         <div className="diamond">
@@ -23,9 +34,11 @@ const Home = () => {
       </div>
 
       {/* Right side button */}
-      <div 
-        className={`side-button right ${hoverState === 'left' ? 'fade-out' : ''}`}
-        onMouseEnter={() => setHoverState('right')}
+      <div
+        className={`side-button right ${
+          hoverState === "left" ? "fade-out" : ""
+        }`}
+        onMouseEnter={() => setHoverState("right")}
         onMouseLeave={() => setHoverState(null)}
         onClick={() => navigate("/introduction")}
       >
@@ -35,13 +48,16 @@ const Home = () => {
         <p>TAKE TEST</p>
       </div>
 
-      {/* Center title */}
-      <div className={`center-content 
-        ${hoverState === 'right' ? 'move-left' : ''} 
-        ${hoverState === 'left' ? 'move-right' : ''}`}>
+      {/* Center Title */}
+      <div
+        className={`center-content 
+          ${hoverState === "right" ? "move-left" : ""} 
+          ${hoverState === "left" ? "move-right" : ""}`}
+      >
         <h1>Sophisticated<br />skincare</h1>
       </div>
 
+      {/* Corner Bottom-Left Description Text */}
       <div className="corner-text">
         <p>
           SKINSTRIC DEVELOPED AN A.I. THAT CREATES A<br />
@@ -49,7 +65,6 @@ const Home = () => {
           WHAT YOUR SKIN NEEDS.
         </p>
       </div>
-
     </div>
   );
 };

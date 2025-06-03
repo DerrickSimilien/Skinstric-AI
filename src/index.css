@@ -324,19 +324,66 @@ button:focus-visible {
 }
 
 .diamond-large {
-  width: 100vh;
-  height: 100vh;
+  width: 75vh;
+  height: 75vh;
 }
 
 .diamond-medium {
-   width: 80vh;
-  height: 80vh;
+  width: 55vh;
+  height: 55vh;
 }
 
 .diamond-small {
-  width: 60vh;
-  height: 60vh;
+  width: 40vh;
+  height: 40vh;
 }
+
+/* =====================================
+   🟨 Giant Bracket Diamond Backgrounds
+===================================== */
+
+.home-left-bracket,
+.home-right-bracket {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.home-left-bracket {
+  left: -60px; /* 🔽 slightly less off-screen */
+}
+
+.home-right-bracket {
+  right: -60px; /* 🔽 match left side */
+}
+
+.home-bracket-diamond {
+  width: 500px;  /* 🔽 scale down from 650px */
+  height: 500px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transform: rotate(45deg) scale(2.0); /* 🔽 reduce scale a little */
+  opacity: 0.25; /* adjust this if it's too bold or too faint */
+}
+
+.home-left-bracket,
+.home-right-bracket {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 300px; /* 🔽 slightly smaller than before */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
 
 /* INTRODUCTION, LOCATION, & NATIONALITY PAGE */ 
 
