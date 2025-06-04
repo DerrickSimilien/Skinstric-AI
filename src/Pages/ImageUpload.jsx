@@ -161,6 +161,21 @@ const ImageUpload = () => {
         </div>
       )}
 
+        {/* Preview Box (Top Right Corner) */}
+{(capturedImage || tempImage) && !showConfirm && !showCameraModal && (
+  <div className="image-preview-box">
+    <p className="preview-label">Preview</p>
+    <div className="preview-frame">
+      <img
+        src={capturedImage || tempImage}
+        alt="Selected Preview"
+        className="preview-img"
+      />
+    </div>
+  </div>
+)}
+
+
       {/* Proceed Button */}
       {capturedImage && (
         <div className="bottom-right-nav" onClick={goToAnalysis}>

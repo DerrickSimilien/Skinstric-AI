@@ -38,7 +38,10 @@ const Introduction = () => {
         <p className={`click-to-type ${inputValue ? "hidden" : ""}`}>
           CLICK TO TYPE
         </p>
-        <div className="input-wrapper">
+    <div className="input-wrapper">
+  {!inputValue && (
+    <div className="placeholder-text">Introduce Yourself</div>
+  )}
   <input
     type="text"
     value={inputValue}
@@ -49,9 +52,6 @@ const Introduction = () => {
     className={inputValue ? "typing" : ""}
   />
   <div className="underline"></div>
-  {!inputValue && (
-    <div className="placeholder-text">Introduce Yourself</div>
-  )}
 </div>
       </div>
     </div>
