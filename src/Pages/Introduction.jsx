@@ -38,19 +38,21 @@ const Introduction = () => {
         <p className={`click-to-type ${inputValue ? "hidden" : ""}`}>
           CLICK TO TYPE
         </p>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSubmit(); // ✅ Go to Location on Enter
-          }}
-          className={inputValue ? "typing" : ""}
-        />
-        <div className="underline"></div>
-        {!inputValue && (
-          <div className="placeholder-text">Introduce Yourself</div>
-        )}
+        <div className="input-wrapper">
+  <input
+    type="text"
+    value={inputValue}
+    onChange={handleChange}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") handleSubmit();
+    }}
+    className={inputValue ? "typing" : ""}
+  />
+  <div className="underline"></div>
+  {!inputValue && (
+    <div className="placeholder-text">Introduce Yourself</div>
+  )}
+</div>
       </div>
     </div>
   );
