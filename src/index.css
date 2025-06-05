@@ -1706,6 +1706,7 @@ input.typing {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  max-width: 200px;
 }
 
 .summary-left,
@@ -1716,9 +1717,37 @@ input.typing {
   flex: 1;
 }
 
-.summary-center {
+/* .summary-center {
   flex: 2;
   text-align: center;
+} */
+
+.summary-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
+  text-align: center;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.main-prediction.top-left {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: #111;
 }
 
 .summary-box {
@@ -1752,6 +1781,30 @@ input.typing {
 .main-prediction {
   font-size: 2rem;
   margin-bottom: 1.5rem;
+}
+
+.main-prediction {
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: #111;
+  margin-right: 40px;
+  align-self: flex-start;
+}
+
+.progress-ring.large-ring {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.percentage-text.large-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .circle-container {
@@ -1845,14 +1898,19 @@ input.typing {
 }
 
 .progress-ring {
+  width: 350px;
+  height: 350px;
   position: relative;
-  width: 120px;
-  height: 120px;
-  margin: 20px auto;
+  margin: 0 auto;
+  margin-right: -10px;
 }
 
 .ring {
-  transform: rotate(-90deg);
+  /* transform: rotate(-90deg); */
+   /* width: 240px;
+   height: 240px; */
+   width: 100%;
+  height: 100%; 
 }
 
 .percentage-text {

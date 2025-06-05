@@ -69,21 +69,21 @@ const DemographicsSummary = () => {
       } catch (error) {
         console.error("❌ Error fetching A.I. results:", error);
         setTimeout(() => {
-  setLoading(false);
-}, 7000); 
+          setLoading(false);
+        }, 7000);
       }
     };
 
     fetchDemographics();
   }, [userData]);
 
- if (loading) {
-  return (
-    <div className="loading-screen2">
-      <div className="spinner2"></div>
-    </div>
-  );
-}
+  if (loading) {
+    return (
+      <div className="loading-screen2">
+        <div className="spinner2"></div>
+      </div>
+    );
+  }
 
   if (!demographics) {
     return (
@@ -132,33 +132,59 @@ const DemographicsSummary = () => {
 
         {/* CENTER SECTION */}
         <div className="summary-center boxed">
-          <div className="main-prediction">{currentTop.label}</div>
-          <div className="progress-ring">
-            <svg className="ring" width="120" height="120">
-              <circle
-                className="ring-background"
-                stroke="#e6e6e6"
-                strokeWidth="10"
-                fill="transparent"
-                r="50"
-                cx="60"
-                cy="60"
-              />
-              <circle
-                className="ring-progress"
-                stroke="black"
-                strokeWidth="10"
-                fill="transparent"
-                r="50"
-                cx="60"
-                cy="60"
-                strokeDasharray="314"
-                strokeDashoffset={314 - (currentTop.confidence / 100) * 314}
-                strokeLinecap="round"
-              />
-            </svg>
-            <div className="percentage-text">{currentTop.confidence}%</div>
-          </div>
+          <div
+  className="main-prediction"
+  style={{
+    position: "absolute",
+    top: "20px",
+    left: "20px",
+    fontSize: "20px",
+    fontWeight: "600",
+    textTransform: "lowercase",
+  }}
+>
+  {activeCategory === "age" ? `${currentTop.label} y.o.` : currentTop.label}
+</div>
+
+         <div className="progress-ring">
+  <svg className="ring" width="350" height="350">
+    <circle
+      className="ring-background"
+      stroke="#e6e6e6"
+      strokeWidth="10"
+      fill="transparent"
+      r="150"
+      cx="175"
+      cy="175"
+    />
+    <circle
+      className="ring-progress"
+      stroke="black"
+      strokeWidth="10"
+      fill="transparent"
+      r="150"
+      cx="175"
+      cy="175"
+      strokeDasharray="942"
+      strokeDashoffset={942 - (currentTop.confidence / 100) * 942}
+      strokeLinecap="round"
+      style={{ transform: "rotate(-90deg)", transformOrigin: "center" }}
+    />
+  </svg>
+  <div
+    className="percentage-text"
+    style={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      fontSize: "30px",
+      fontWeight: "bold",
+    }}
+  >
+    {currentTop.confidence}%
+  </div>
+</div>
         </div>
 
         {/* RIGHT COLUMN */}
