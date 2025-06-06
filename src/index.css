@@ -17,6 +17,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -1935,6 +1937,8 @@ input.typing {
   left: 40px;
   z-index: 999;
 }
+
+
 
 
 

@@ -105,7 +105,7 @@ const DemographicsSummary = () => {
     : getTopPrediction(currentData, activeCategory);
 
   return (
-    <div className="summary-wrapper">
+    <div className="summary-wrapper" style={{ position: 'relative', paddingBottom: '120px' }}>
       <header className="summary-header">
         <p className="section-label">A.I. ANALYSIS</p>
         <h1 className="main-title">DEMOGRAPHICS</h1>
