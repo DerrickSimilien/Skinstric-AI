@@ -133,58 +133,58 @@ const DemographicsSummary = () => {
         {/* CENTER SECTION */}
         <div className="summary-center boxed">
           <div
-  className="main-prediction"
-  style={{
-    position: "absolute",
-    top: "20px",
-    left: "20px",
-    fontSize: "20px",
-    fontWeight: "600",
-    textTransform: "lowercase",
-  }}
->
-  {activeCategory === "age" ? `${currentTop.label} y.o.` : currentTop.label}
-</div>
+            className="main-prediction"
+            style={{
+              position: "absolute",
+              top: "20px",
+              left: "20px",
+              fontSize: "20px",
+              fontWeight: "600",
+              textTransform: "lowercase",
+            }}
+          >
+            {activeCategory === "age" ? `${currentTop.label} y.o.` : currentTop.label}
+          </div>
 
-         <div className="progress-ring">
-  <svg className="ring" width="350" height="350">
-    <circle
-      className="ring-background"
-      stroke="#e6e6e6"
-      strokeWidth="10"
-      fill="transparent"
-      r="150"
-      cx="175"
-      cy="175"
-    />
-    <circle
-      className="ring-progress"
-      stroke="black"
-      strokeWidth="10"
-      fill="transparent"
-      r="150"
-      cx="175"
-      cy="175"
-      strokeDasharray="942"
-      strokeDashoffset={942 - (currentTop.confidence / 100) * 942}
-      strokeLinecap="round"
-      style={{ transform: "rotate(-90deg)", transformOrigin: "center" }}
-    />
-  </svg>
-  <div
-    className="percentage-text"
-    style={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      fontSize: "30px",
-      fontWeight: "bold",
-    }}
-  >
-    {currentTop.confidence}%
-  </div>
-</div>
+          <div className="progress-ring">
+            <svg className="ring" width="350" height="350">
+              <circle
+                className="ring-background"
+                stroke="#e6e6e6"
+                strokeWidth="10"
+                fill="transparent"
+                r="150"
+                cx="175"
+                cy="175"
+              />
+              <circle
+                className="ring-progress"
+                stroke="black"
+                strokeWidth="10"
+                fill="transparent"
+                r="150"
+                cx="175"
+                cy="175"
+                strokeDasharray="942"
+                strokeDashoffset={942 - (currentTop.confidence / 100) * 942}
+                strokeLinecap="round"
+                style={{ transform: "rotate(-90deg)", transformOrigin: "center" }}
+              />
+            </svg>
+            <div
+              className="percentage-text"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                fontSize: "30px",
+                fontWeight: "bold",
+              }}
+            >
+              {currentTop.confidence}%
+            </div>
+          </div>
         </div>
 
         {/* RIGHT COLUMN */}
@@ -208,6 +208,20 @@ const DemographicsSummary = () => {
               ))}
           </ul>
         </div>
+      </div>
+
+      {/* Instruction Text (bottom of page) */}
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "12px",
+          marginTop: "16px",
+          marginBottom: "8px",
+          color: "#999",
+          fontFamily: "Raleway, sans-serif",
+        }}
+      >
+        If A.I. estimate is wrong, select the correct one.
       </div>
 
       {/* FIXED BOTTOM LEFT BACK BUTTON */}
