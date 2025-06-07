@@ -17,8 +17,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* height: 100vh;
-  overflow: hidden; */
+  height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -411,16 +411,15 @@ button:focus-visible {
 }
 
 .top-left-analysis {
-  position: absolute;
-  top: 64px; /* Below the navbar */
-  left: 40px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #000;
-  letter-spacing: 0.5px;
-  z-index: 10;
+  position: fixed;
+  top: 65px !important;
+  left: 30px !important;;
   font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #000;
+  z-index: 1000;
 }
 
 .bottom-left-nav {
@@ -659,13 +658,14 @@ input.typing {
 /* Image Uploading */
 
 .icon-wrapper {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  position: relative;
-  z-index: 2;
-  margin-top: 10px;
+  justify-content: center;
 }
 
 .label-heading {
@@ -681,10 +681,22 @@ input.typing {
 
 .image-preview-box {
   position: absolute;
-  top: 80px;
+  top: 50px;
   right: 40px;
   text-align: center;
   z-index: 15;
+}
+
+.upload-reminder {
+  position: fixed;
+  top: 50px; /* 🔼 Move it higher */
+  right: 40px;
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+  z-index: 1000;
+  max-width: 200px;
+  line-height: 1.4;
 }
 
 .preview-label {
@@ -854,8 +866,12 @@ input.typing {
 }
 
 @keyframes spinSquare {
-  0% { transform: translate(-50%, -50%) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg); }
+  from {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(405deg); /* +360 degrees */
+  }
 }
 
 
@@ -863,7 +879,7 @@ input.typing {
   position: absolute;
   top: 50%;
   left: 50%;
-  border: 1.5px dotted rgba(0, 0, 0, 0.25);
+  border: 2.5px dotted #000; /* 🔁 DARKER */
   background: none;
   transform: translate(-50%, -50%) rotate(45deg);
   pointer-events: none;
@@ -871,20 +887,24 @@ input.typing {
   animation: spinSquare 10s linear infinite;
 }
 
-
 .square-small {
-  width: 160px;
-  height: 160px;
+  width: 240px;
+  height: 240px;
+   animation: spinSquare 10s linear infinite;
 }
 
 .square-medium {
-  width: 220px;
-  height: 220px;
+  width: 300px;
+  height: 300px;
+  animation: spinSquare 13s linear infinite;
+  transform: translate(-50%, -50%) rotate(65deg); /* different start angle */
 }
 
 .square-large {
-  width: 280px;
-  height: 280px;
+  width: 360px;
+  height: 360px;
+  animation: spinSquare 16s linear infinite reverse;
+  transform: translate(-50%, -50%) rotate(85deg); /* different + reversed */
 }
 
 .line-to-icon {

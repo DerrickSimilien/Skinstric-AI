@@ -14,16 +14,24 @@ const ImageUpload = () => {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-  if (location.state?.capturedImage) {
-    setCapturedImage(location.state.capturedImage);
-    setUserData((prev) => ({
-      ...prev,
-      capturedImage: location.state.capturedImage,
-    }));
-  } else if (!location.state?.capturedImage && userData?.capturedImage) {
-    setCapturedImage(userData.capturedImage);
-  }
-}, [location.state?.capturedImage, setUserData]);
+    const isReloaded = performance.getEntriesByType("navigation")[0]?.type === "reload";
+
+    if (isReloaded) {
+      // Clear captured image on hard refresh
+      setCapturedImage(null);
+      setUserData((prev) => ({ ...prev, capturedImage: null }));
+    } else if (location.state?.capturedImage) {
+      // Coming from CameraPage
+      setCapturedImage(location.state.capturedImage);
+      setUserData((prev) => ({
+        ...prev,
+        capturedImage: location.state.capturedImage,
+      }));
+    } else if (!location.state?.capturedImage && userData?.capturedImage) {
+      // Use existing userData image (normal nav)
+      setCapturedImage(userData.capturedImage);
+    }
+  }, [location.state?.capturedImage, setUserData]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -84,27 +92,27 @@ const ImageUpload = () => {
       <div className="image-options-wrapper">
         {/* Camera Section */}
         <div className="image-option left-icon">
-  <div className="camera-block"> {/* ✅ NEW WRAPPER */}
-    <div className="spinning-square square-small"></div>
-    <div className="spinning-square square-medium"></div>
-    <div className="spinning-square square-large"></div>
-    <div className="icon-wrapper">
-      <img
-        src="/Camera.png"
-        alt="Camera"
-        className="icon-img"
-        onClick={() => {
-          setCameraClicked(true);
-          setShowCameraModal(true);
-        }}
-      />
-      <div className="line-to-icon-camera" />
-      <div className="label-heading-camera">
-        ALLOW A.I.<br />TO SCAN YOUR FACE
-      </div>
-    </div>
-  </div>
-</div>
+          <div className="camera-block">
+            <div className="spinning-square square-small"></div>
+            <div className="spinning-square square-medium"></div>
+            <div className="spinning-square square-large"></div>
+            <div className="icon-wrapper">
+              <img
+                src="/Camera.png"
+                alt="Camera"
+                className="icon-img"
+                onClick={() => {
+                  setCameraClicked(true);
+                  setShowCameraModal(true);
+                }}
+              />
+              <div className="line-to-icon-camera" />
+              <div className="label-heading-camera">
+                ALLOW A.I.<br />TO SCAN YOUR FACE
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* Gallery Section */}
         <div className={`image-option right-icon ${cameraClicked ? "faded" : ""}`}>
@@ -130,7 +138,7 @@ const ImageUpload = () => {
 
       {/* Show instruction if no image is chosen yet */}
       {!capturedImage && !showConfirm && !showCameraModal && (
-        <div style={{ textAlign: "center", marginTop: "2rem", color: "#888", fontSize: "14px" }}>
+        <div className="upload-reminder">
           Please upload an image or allow camera access to continue.
         </div>
       )}
@@ -161,20 +169,19 @@ const ImageUpload = () => {
         </div>
       )}
 
-        {/* Preview Box (Top Right Corner) */}
-{(capturedImage || tempImage) && !showConfirm && !showCameraModal && (
-  <div className="image-preview-box">
-    <p className="preview-label">Preview</p>
-    <div className="preview-frame">
-      <img
-        src={capturedImage || tempImage}
-        alt="Selected Preview"
-        className="preview-img"
-      />
-    </div>
-  </div>
-)}
-
+      {/* Preview Box (Top Right Corner) */}
+      {(capturedImage || tempImage) && !showConfirm && !showCameraModal && (
+        <div className="image-preview-box">
+          <p className="preview-label">Preview</p>
+          <div className="preview-frame">
+            <img
+              src={capturedImage || tempImage}
+              alt="Selected Preview"
+              className="preview-img"
+            />
+          </div>
+        </div>
+      )}
 
       {/* Proceed Button */}
       {capturedImage && (
