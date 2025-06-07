@@ -14,24 +14,21 @@ const ImageUpload = () => {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    const isReloaded = performance.getEntriesByType("navigation")[0]?.type === "reload";
+    const imageFromLocation = location.state?.capturedImage;
 
-    if (isReloaded) {
-      // Clear captured image on hard refresh
-      setCapturedImage(null);
-      setUserData((prev) => ({ ...prev, capturedImage: null }));
-    } else if (location.state?.capturedImage) {
-      // Coming from CameraPage
-      setCapturedImage(location.state.capturedImage);
+    if (imageFromLocation) {
+      setCapturedImage(imageFromLocation);
       setUserData((prev) => ({
         ...prev,
-        capturedImage: location.state.capturedImage,
+        capturedImage: imageFromLocation,
       }));
-    } else if (!location.state?.capturedImage && userData?.capturedImage) {
-      // Use existing userData image (normal nav)
+
+      // Clear location state so it's ready for the next update
+      navigate(location.pathname, { replace: true, state: {} });
+    } else if (userData?.capturedImage) {
       setCapturedImage(userData.capturedImage);
     }
-  }, [location.state?.capturedImage, setUserData]);
+  }, [location, userData?.capturedImage, navigate, setUserData]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

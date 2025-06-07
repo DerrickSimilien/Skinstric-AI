@@ -13,44 +13,44 @@ const Location = () => {
 
   const handleSubmit = () => {
     if (inputValue.trim() !== "") {
-      setUserData({ ...userData, location: inputValue }); // ✅ Corrected
+      setUserData({ ...userData, location: inputValue });
       navigate("/nationality");
     }
   };
 
   return (
-    <div className="introduction-page">
-      <div className="diamond-bg"></div>
+    <div className="introduction-page5">
+      {/* 🔳 Spinning Squares */}
+      <div className="spinning-square5 square-small5"></div>
+      <div className="spinning-square5 square-medium5"></div>
+      <div className="spinning-square5 square-large5"></div>
 
-      {/* TOP LEFT ANALYSIS TEXT */}
-      <div className="top-left-analysis">TO START ANALYSIS</div>
+      {/* 🔼 Top-left Analysis Text */}
+      <div className="top-left-analysis5">TO START ANALYSIS</div>
 
-      {/* BACK BUTTON BOTTOM LEFT */}
-      <div className="bottom-left-nav" onClick={() => navigate("/Introduction")}>
-        <div className="diamond small-diamond">
-          <span className="arrow">◀</span>
+      {/* ◀ Back Button */}
+      <div className="bottom-left-nav5" onClick={() => navigate("/introduction")}>
+        <div className="diamond5 small-diamond5">
+          <span className="arrow5">◀</span>
         </div>
-        <span className="back-text">BACK</span>
+        <span className="back-text5">BACK</span>
       </div>
 
-      {/* Center Input Area */}
-      <div className="center-input">
-        <p className={`click-to-type ${inputValue ? "hidden" : ""}`}>
-          CLICK TO TYPE
-        </p>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleChange}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") handleSubmit();
-          }}
-          className={inputValue ? "typing" : ""}
-        />
-        <div className="underline"></div>
-        {!inputValue && (
-          <div className="placeholder-text">Where are you from?</div>
-        )}
+      {/* 🖊 Input Section */}
+      <div className="center-input5">
+        <p className={`click-to-type5 ${inputValue ? "hidden5" : ""}`}>CLICK TO TYPE</p>
+        <div className="input-wrapper5">
+          {!inputValue && <div className="placeholder-text5">Where are you from?</div>}
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            className="typing5"
+            placeholder=""
+          />
+          <div className="underline5"></div>
+        </div>
       </div>
     </div>
   );

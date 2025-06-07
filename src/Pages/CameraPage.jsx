@@ -65,16 +65,39 @@ const CameraPage = () => {
     const dataURL = canvas.toDataURL("image/png");
     setCapturedPhoto(dataURL);
     stopCamera();
+  };
 
-    // Save and redirect
-    setUserData({ ...userData, capturedImage: dataURL });
-    navigate("/image-upload", { state: { capturedImage: dataURL } });
+  const retakePhoto = () => {
+    setCapturedPhoto(null);
+    setIsLoading(true);
+    startCamera();
+  };
+
+  const confirmPhoto = () => {
+    setUserData({ ...userData, capturedImage: capturedPhoto });
+    navigate("/image-upload", { state: { capturedImage: capturedPhoto } });
   };
 
   return (
     <div className="camera-page">
       {/* 🔳 Diamond Background */}
       <div className="diamond-bg"></div>
+
+      {/* 🟣 Top Nav */}
+      <div className="camera-custom-top-text">
+        <span className="brand-name">SKINSTRIC</span>
+        <span className="intro-label">[ INTRO ]</span>
+      </div>
+
+      {/* ✅ Back Button — only after photo is captured */}
+{capturedPhoto && (
+  <div className="bottom-left-nav2" onClick={() => navigate("/image-upload")}>
+    <div className="diamond small-diamond">
+      <span className="nav-arrow">◀</span>
+    </div>
+    <span className="back-text2">BACK</span>
+  </div>
+)}
 
       {/* 🟣 Camera Permission Modal */}
       {showPrompt && (
@@ -100,13 +123,7 @@ const CameraPage = () => {
       {/* 🟣 Loading Text */}
       {isLoading && <div className="loading-text">SETTING UP CAMERA...</div>}
 
-      {/* 🟣 Navbar Style Text (Skinstric [Intro]) */}
-      <div className="camera-custom-top-text">
-  <span className="brand-name">SKINSTRIC</span>
-  <span className="intro-label">[ INTRO ]</span>
-</div>
-
-      {/* 🟣 Live Camera Feed */}
+      {/* 📸 Live Camera Feed */}
       {!showPrompt && !capturedPhoto && (
         <div className="camera-feed-wrapper">
           <div className="camera-feed-container">
@@ -121,7 +138,6 @@ const CameraPage = () => {
             />
             {cameraStarted && (
               <>
-                {/* Tips */}
                 <div className="camera-tips-inside-feed">
                   <p className="tip-heading">TO GET BETTER RESULTS MAKE SURE TO HAVE</p>
                   <div className="tip-icons">
@@ -130,24 +146,37 @@ const CameraPage = () => {
                     <span>◇ ADEQUATE LIGHTING</span>
                   </div>
                 </div>
-
-                {/* Camera Icon (Right side, clickable) */}
                 <div
                   className="floating-capture-icon"
                   title="Take Picture"
                   onClick={capturePhoto}
                 >
-    <span className="camera-label-text">TAKE PICTURE</span>
-        <div className="camera-icon-circle">
-    <img
-      src="/action-cam-icon.png"
-      alt="Capture"
-      className="camera-icon-img"
-    />
-  </div>
+                  <span className="camera-label-text">TAKE PICTURE</span>
+                  <div className="camera-icon-circle">
+                    <img
+                      src="/action-cam-icon.png"
+                      alt="Capture"
+                      className="camera-icon-img"
+                    />
+                  </div>
                 </div>
               </>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ✅ Captured Preview Overlay */}
+      {capturedPhoto && (
+        <div className="camera-preview-screen">
+          <img src={capturedPhoto} alt="Captured" className="captured-image-full" />
+          <div className="overlay-text">
+            <h2 className="great-shot-text">GREAT SHOT!</h2>
+            <p className="preview-label2">Preview</p>
+            <div className="camera-action-buttons">
+              <button className="retake-btn2" onClick={retakePhoto}>Retake</button>
+              <button className="confirm-btn2" onClick={confirmPhoto}>Use This Photo</button>
+            </div>
           </div>
         </div>
       )}
