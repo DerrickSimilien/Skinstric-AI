@@ -226,11 +226,11 @@ const DemographicsSummary = () => {
 
       {/* FIXED BOTTOM LEFT BACK BUTTON */}
       <button className="demographics-back-btn fixed-bottom-left" onClick={() => navigate(-1)}>
-        <div className="diamond">
-          <span className="arrow">◀</span>
-        </div>
-        <span className="back-text">BACK</span>
-      </button>
+      <div className="diamond">
+        <span className="arrow">◀</span>
+      </div>
+      <span className="back-text">BACK</span>
+    </button>
 
       {/* FIXED BOTTOM RIGHT FOOTER BUTTONS */}
       <div className="demographics-footer-buttons">
