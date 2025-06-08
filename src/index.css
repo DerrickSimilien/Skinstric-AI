@@ -3057,8 +3057,8 @@ input.typing {
   }
 
   .top-left-analysis6 {
-    top: 30px;
-    left: 20px;
+    top: 25px;
+    left: 30px;
     font-size: 12px;
   }
 
@@ -3071,7 +3071,175 @@ input.typing {
     font-size: 10px;
   }
 
-  
+   .image-options-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 80px;
+  }
+
+  .image-option {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .icon-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .label-heading-camera,
+  .label-heading-gallery {
+    font-size: 0.75rem;
+    text-align: center;
+    font-weight: bold;
+    max-width: 140px;
+    line-height: 1.2rem;
+    position: static;
+  }
+
+  .line-to-icon-camera,
+  .line-to-icon-gallery {
+    display: none; /* Hide lines on mobile to avoid clutter */
+  }
+
+  .upload-reminder {
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 20px;
+    position: static;
+  }
+
+  .image-preview-box {
+    position: static;
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .preview-frame {
+    width: 150px;
+    height: 150px;
+  }
+
+  .top-left-analysis,
+  .top-right-code {
+    text-align: center;
+    width: 100%;
+    position: static;
+  }
+
+  .bottom-left-nav,
+  .bottom-right-nav {
+    position: fixed;
+    bottom: 20px;
+    font-size: 0.9rem;
+  }
+
+  .bottom-left-nav {
+    left: 20px;
+  }
+
+  .bottom-right-nav {
+    right: 20px;
+  }
+
+  .confirmation-modal {
+    width: 90%;
+  }
+
+   .left-icon .icon-img {
+    position: relative;
+    top: 120px; /* nudges it down */
+    left: -5px;
+  }
+
+   .right-icon .icon-img {
+    position: relative;
+    left: -37px;  /* nudges it to the left */
+    top: -50px;   /* nudges it upward */
+  }
+
+  .right-icon .label-heading-gallery {
+    position: relative;
+    left: 110px;    /* nudges it right */
+  }
+
+   .left-icon .label-heading-camera {
+    position: relative;
+    left: -150px;   /* nudges it left */
+    top: 20px;     /* nudges it downward */
+  }
+
+   .bottom-left-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.top-right-code {
+  position: fixed;
+  top: 20px;
+  right: -210px;
+  z-index: 1000;
+}
+
+.introduction-page {
+  overflow-y: auto;
+  max-height: none;
+  min-height: 100vh;
+  position: relative;
+}
+
+.image-preview-box {
+  margin-top: 30px;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.preview-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
+}
+
+.enter-code-btn {
+  pointer-events: none;
+  cursor: default;
+  opacity: 1; /* Keep it fully visible */
+}
+
+.image-preview-box {
+    margin-top: 16px; /* was likely 30px+, reduce this */
+    margin-bottom: 60px; /* give space above the nav buttons */
+    text-align: center;
+  }
+
+   .top-left-analysis {
+    position: fixed !important;
+    top: 25px !important; /* Adjust this value up/down for perfect alignment */
+    left: 12px !important;
+    right: 0px;
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    z-index: 1000;
+  }
 
 }
 
