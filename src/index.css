@@ -18,7 +18,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 body {
@@ -43,7 +43,7 @@ body {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
   }
   a:hover {
     color: #747bff;
@@ -2488,6 +2488,24 @@ input.typing {
   font-weight: 600;
 }
 
+.left-back-btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.summary-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.summary-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .confidence-header {
   display: flex;
   justify-content: space-between;
@@ -2588,20 +2606,44 @@ input.typing {
 
 /* FLOATING BACK BUTTON (bottom left like OG) */
 .fixed-bottom-left {
-  position: fixed;
+  /* position: fixed; */
   bottom: 32px;
   left: 40px;
   z-index: 999;
 }
 
 .demographics-back-btn.fixed-bottom-left {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999;
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  z-index: 1000;
+  background: none;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  font-family: inherit;
+}
+
+.demographics-back-btn .diamond {
+  width: 34px;
+  height: 34px;
+  border: 2px solid black;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+
+.demographics-back-btn .arrow {
+  transform: rotate(-45deg);
+  font-size: 14px;
+}
+
+.demographics-back-btn .back-text {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 
@@ -3262,11 +3304,22 @@ input.typing {
     padding-bottom: 160px !important; /* makes room for bottom buttons */
   }
 
-.demographics-back-btn.fixed-bottom-left {
-    bottom: 16px;
-    left: 16px;
+ .demographics-back-btn.fixed-bottom-left {
+    /* position: fixed; */
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
   }
 
+ .demographics-back-btn.fixed-bottom-left {
+    bottom: 30px;
+  }
 
 }
 
@@ -3584,6 +3637,28 @@ input.typing {
     font-weight: 600;
     color: black;
     z-index: 1000;
+  }
+
+  .summary-grid {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .summary-left {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .summary-box {
+    text-align: center;
+    width: 250px;
   }
 
 }
