@@ -57,6 +57,21 @@ const Home = () => {
           TAILORED TO WHAT YOUR SKIN NEEDS.
         </p>
       </div>
+      {/* <div className="mobile-hero-group">
+  <div className="mobile-diamond-border">
+    <h1 className="mobile-title">Sophisticated<br />skincare</h1>
+    <p className="mobile-subtitle">
+      Skinstric developed an <strong>A.I.</strong> that creates a highly-personalized routine tailored to what your skin needs.
+    </p>
+    <button
+      className="mobile-start-btn"
+      onClick={() => navigate("/introduction")}
+    >
+      ENTER EXPERIENCE
+      <span className="diamond-icon">◈</span>
+    </button>
+  </div>
+</div> */}
     </div>
   );
 };
