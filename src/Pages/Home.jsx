@@ -8,44 +8,36 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* GIANT DIAMOND BRACKETS (left & right background diamonds) */}
-      <div className="home-left-bracket">
-        <div className="home-bracket-diamond"></div>
-      </div>
-      <div className="home-right-bracket">
-        <div className="home-bracket-diamond"></div>
-      </div>
-
-      {/* Floating animated diamond stack in center */}
-      <DiamondTrio />
+      {/* Diamond Trio in center-left and center-right */}
+      <DiamondTrio hoverState={hoverState} />
 
       {/* Left side button */}
       <div
-        className={`side-button left ${
-          hoverState === "right" ? "fade-out" : ""
-        }`}
+        className={`side-button left ${hoverState === "right" ? "fade-out" : ""}`}
         onMouseEnter={() => setHoverState("left")}
         onMouseLeave={() => setHoverState(null)}
       >
-        <div className="diamond">
-          <span className="arrow">◀</span>
+        <div className="diamond-with-label">
+          <div className="diamond">
+            <span className="arrow">◀</span>
+          </div>
+          <p>DISCOVER A.I.</p>
         </div>
-        <p>DISCOVER A.I.</p>
       </div>
 
       {/* Right side button */}
       <div
-        className={`side-button right ${
-          hoverState === "left" ? "fade-out" : ""
-        }`}
+        className={`side-button right ${hoverState === "left" ? "fade-out" : ""}`}
         onMouseEnter={() => setHoverState("right")}
         onMouseLeave={() => setHoverState(null)}
         onClick={() => navigate("/introduction")}
       >
-        <div className="diamond">
-          <span className="arrow">▶</span>
+        <div className="diamond-with-label">
+          <div className="diamond">
+            <span className="arrow">▶</span>
+          </div>
+          <p>TAKE TEST</p>
         </div>
-        <p>TAKE TEST</p>
       </div>
 
       {/* Center Title */}
@@ -60,9 +52,9 @@ const Home = () => {
       {/* Corner Bottom-Left Description Text */}
       <div className="corner-text">
         <p>
-          SKINSTRIC DEVELOPED AN A.I. THAT CREATES A<br />
-          HIGHLY-PERSONALIZED ROUTINE TAILORED TO<br />
-          WHAT YOUR SKIN NEEDS.
+          SKINSTRIC DEVELOPED AN A.I. THAT<br />
+          CREATES A HIGHLY-PERSONALIZED ROUTINE<br />
+          TAILORED TO WHAT YOUR SKIN NEEDS.
         </p>
       </div>
     </div>
