@@ -13,22 +13,29 @@ const ImageUpload = () => {
   const [cameraClicked, setCameraClicked] = useState(false);
   const fileInputRef = useRef(null);
 
-  useEffect(() => {
-    const imageFromLocation = location.state?.capturedImage;
+ useEffect(() => {
+  const imageFromLocation = location.state?.capturedImage;
 
-    if (imageFromLocation) {
-      setCapturedImage(imageFromLocation);
-      setUserData((prev) => ({
-        ...prev,
-        capturedImage: imageFromLocation,
-      }));
+  // Always reset state on load
+  setCapturedImage(null);
+  setTempImage(null);
+  setUserData((prev) => ({
+    ...prev,
+    capturedImage: null,
+  }));
 
-      // Clear location state so it's ready for the next update
-      navigate(location.pathname, { replace: true, state: {} });
-    } else if (userData?.capturedImage) {
-      setCapturedImage(userData.capturedImage);
-    }
-  }, [location, userData?.capturedImage, navigate, setUserData]);
+  // If coming from camera with image, set it
+  if (imageFromLocation) {
+    setCapturedImage(imageFromLocation);
+    setUserData((prev) => ({
+      ...prev,
+      capturedImage: imageFromLocation,
+    }));
+
+    // Clear state from navigation
+    navigate(location.pathname, { replace: true, state: {} });
+  }
+}, [location.pathname, navigate, setUserData]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -133,12 +140,12 @@ const ImageUpload = () => {
         </div>
       </div>
 
-      {/* Show instruction if no image is chosen yet */}
+      {/* Show instruction if no image is chosen yet
       {!capturedImage && !showConfirm && !showCameraModal && (
         <div className="upload-reminder">
           Please upload an image or allow camera access to continue.
         </div>
-      )}
+      )} */}
 
       {/* Confirmation Modal */}
       {showConfirm && tempImage && (
@@ -167,18 +174,22 @@ const ImageUpload = () => {
       )}
 
       {/* Preview Box (Top Right Corner) */}
-      {(capturedImage || tempImage) && !showConfirm && !showCameraModal && (
-        <div className="image-preview-box">
-          <p className="preview-label">Preview</p>
-          <div className="preview-frame">
-            <img
-              src={capturedImage || tempImage}
-              alt="Selected Preview"
-              className="preview-img"
-            />
-          </div>
-        </div>
+     {!showConfirm && !showCameraModal && (
+  <div className="image-preview-box">
+    <p className="preview-label">Preview</p>
+    <div className="preview-frame">
+      {capturedImage || tempImage ? (
+        <img
+          src={capturedImage || tempImage}
+          alt="Selected Preview"
+          className="preview-img"
+        />
+      ) : (
+        <div className="preview-placeholder">No image selected</div>
       )}
+    </div>
+  </div>
+)}
 
       {/* Proceed Button */}
       {capturedImage && (
