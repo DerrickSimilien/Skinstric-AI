@@ -493,6 +493,10 @@ button:focus-visible {
   transform: rotate(-45deg);
 }
 
+.diamond-with-label p {
+  color: black;
+}
+
 .center-input {
   position: absolute;
   top: 50%;
@@ -2972,12 +2976,16 @@ input.typing {
 .ao-back-btn {
   bottom: 30px;
   left: 30px;
+  color: black;
 }
 
 .ao-proceed-btn {
   bottom: 30px;
   right: 30px;
+  color: black;
 }
+
+
 
 .ao-small-diamond {
   width: 30px;
@@ -3016,12 +3024,22 @@ input.typing {
   transition: all 0.3s ease;
 }
 
-.ao-diamond-chart-wrapper {
+/* .ao-diamond-chart-wrapper {
   position: relative;
   width: 420px;
   height: 420px;
   margin: 0 auto;
   top: 120px;
+} */
+
+.ao-diamond-chart-wrapper {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .ao-diamond-hover-area:hover .ao-outline {
