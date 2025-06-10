@@ -2473,6 +2473,51 @@ input.typing {
   text-transform: uppercase;
 }
 
+.summary-box .value,
+.summary-box .label {
+  color: black;
+}
+
+.summary-box.active .value,
+.summary-box.active .label {
+  color: white;
+}
+
+.main-prediction {
+  color: black !important;
+}
+
+.summary-box.active ~ .summary-center .main-prediction {
+  color: white !important;
+}
+
+.percentage-text {
+  color: black !important;
+}
+
+.summary-box.active ~ .summary-center .percentage-text {
+  color: white !important;
+}
+
+.confidence-item {
+  color: black;
+}
+
+.confidence-item.active {
+  background: #000;
+  color: #fff;
+}
+
+.confidence-item.active,
+.confidence-item.active span,
+.confidence-item.active svg {
+  color: white !important;
+}
+
+.section-label {
+  color: black;
+}
+
 .summary-box .label {
   font-size: 12px;
   color: #666;
@@ -2551,6 +2596,7 @@ input.typing {
   font-weight: bold;
   border-bottom: 2px solid #000;
   padding-bottom: 0.5rem;
+  color: black;
 }
 
 .confidence-list {
@@ -2641,6 +2687,7 @@ input.typing {
   transform: translate(-50%, -50%);
   font-size: 24px;
   font-weight: bold;
+  color: black !important;
 }
 
 /* FLOATING BACK BUTTON (bottom left like OG) */
@@ -2781,6 +2828,7 @@ input.typing {
 .confirm-btn,
 .cancel-btn {
   border-radius: 0 !important;
+  
 }
 
 /* .ai-instruction-text {
