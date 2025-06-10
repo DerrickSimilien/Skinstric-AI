@@ -757,6 +757,7 @@ input.typing {
   font-weight: bold;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
+  color: black;
 }
 
 .bottom-left-nav4 {
@@ -985,6 +986,7 @@ input.typing {
   font-weight: bold;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
+  color: black;
 }
 
 .bottom-left-nav6 {
@@ -1090,6 +1092,7 @@ input.typing {
   font-weight: bold;
   font-family: 'Raleway', sans-serif;
   font-size: 14px;
+  color: black;
 }
 
 /* Bottom-Left Navigation */
@@ -1153,13 +1156,14 @@ input.typing {
   align-items: center;
   cursor: pointer;
   z-index: 3;
+  color: black;
 }
 
 .proceed-text {
   margin-right: 12px;
   font-size: 14px;
   font-weight: 500;
-  color: black;
+  color: black !important;
 }
 
 .go-to-upload-button {
@@ -3986,6 +3990,60 @@ input.typing {
     font-size: 1rem;
   }
 
+  .ao-diamond-chart-wrapper {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    top: 260px; /* adjust if you want to push it lower */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .ao-diamond-grid {
+    width: 160px;
+    height: 160px;
+  }
+
+  .ao-diamond {
+    width: 100px;
+    height: 100px;
+    padding: 8px;
+  }
+
+  .ao-top {
+    top: -55px;
+    left: 30px;
+  }
+
+  .ao-left {
+    top: 30px;
+    left: -55px;
+  }
+
+  .ao-right {
+    top: 30px;
+    left: 120px;
+  }
+
+  .ao-bottom {
+    top: 120px;
+    left: 30px;
+  }
+
+  .ao-label {
+    font-size: 11px;
+  }
+
+  /* Adjust outlines */
+  .ao-outline-1 { width: 320px; height: 320px; }
+  .ao-outline-2 { width: 360px; height: 360px; }
+  .ao-outline-3 { width: 400px; height: 400px; }
+  .ao-outline-4 { width: 440px; height: 440px; }
+
 }
 
 
@@ -4475,10 +4533,13 @@ input.typing {
     line-height: 1.4;
   }
 
-  .ao-diamond-chart-wrapper {
+   .ao-diamond-chart-wrapper {
+    position: absolute;
     width: 280px;
     height: 280px;
-    top: 230px;
+    top: 315px; /* ⬅️ push it lower (adjust as needed) */
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
