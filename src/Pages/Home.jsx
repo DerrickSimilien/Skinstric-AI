@@ -8,6 +8,33 @@ const Home = () => {
 
   return (
     <div className="home-container">
+
+      {/* ✅ Mobile layout only (600px and below) */}
+      <div className="mobile-hero-group">
+         <div className="mobile-diamond-border">
+
+    <div className="mobile-inner-square"></div>
+
+    <h1 className="mobile-title">
+      Sophisticated<br />skincare
+    </h1>
+
+    {/* ✅ Paragraph goes first */}
+    <p className="mobile-subtitle">
+      Skinstric developed an <strong>A.I.</strong> that creates a highly-personalized routine tailored to what your skin needs.
+    </p>
+
+    {/* ✅ Button comes after the paragraph */}
+    <button
+      className="mobile-start-btn"
+      onClick={() => navigate("/introduction")}
+    >
+      ENTER EXPERIENCE
+      <span className="diamond-icon">▶</span>
+    </button>
+  </div>
+      </div>
+
       {/* Diamond Trio in center-left and center-right */}
       <DiamondTrio hoverState={hoverState} />
 
@@ -57,21 +84,6 @@ const Home = () => {
           TAILORED TO WHAT YOUR SKIN NEEDS.
         </p>
       </div>
-      {/* <div className="mobile-hero-group">
-  <div className="mobile-diamond-border">
-    <h1 className="mobile-title">Sophisticated<br />skincare</h1>
-    <p className="mobile-subtitle">
-      Skinstric developed an <strong>A.I.</strong> that creates a highly-personalized routine tailored to what your skin needs.
-    </p>
-    <button
-      className="mobile-start-btn"
-      onClick={() => navigate("/introduction")}
-    >
-      ENTER EXPERIENCE
-      <span className="diamond-icon">◈</span>
-    </button>
-  </div>
-</div> */}
     </div>
   );
 };

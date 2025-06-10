@@ -34,7 +34,9 @@ body {
   font-family: 'Raleway', sans-serif !important;
 }
 
-
+.mobile-hero-group {
+  display: none;
+}
 
 
 /* =====================================
@@ -2809,12 +2811,12 @@ input.typing {
   }
 }
 
-@media (max-width: 600px) {
+/* @media (max-width: 600px) {
   .center-content h1 {
     font-size: 42px;
     line-height: 48px;
   }
-}
+} */
 
 @media (max-width: 1024px) {
   .center-content h1 {
@@ -3358,14 +3360,119 @@ input.typing {
     bottom: 30px;
   }
 
+    .center-content h1 {
+    font-size: 42px;
+    line-height: 48px;
+    margin-left: -8px !important; /* ✅ Already in your code */
+  }
+
+  /* ✅ Add this to slightly nudge the whole container left */
+  .center-content {
+    left: 49% !important;
+  }
+
+  .home-container > *:not(.mobile-hero-group) {
+    display: none !important;
+  }
+
+  .mobile-hero-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .mobile-diamond-border {
+  border: 2px dotted #ccc;
+  border-radius: 0;
+  padding: 2rem;
+  transform: rotate(45deg);
+  width: 85vw;
+  max-width: 400px;
+  min-height: 420px; /* 🔥 force height for visual layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 50px;;
+}
+
+
+ .mobile-diamond-border * {
+  transform: rotate(-45deg);
+  margin: 0.5rem 0; /* 🔥 ensures spacing between items */
+}
+
+  .mobile-title {
+    font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    transform: rotate(-45deg) translateX(-60px);
+    color: black;
+  }
+
   
+
+
+  .mobile-subtitle {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 27px;
+    margin-top: 24px;
+    transform: rotate(-45deg) translateX(36px);
+    font-weight: bold;
+    color: gray;
+  }
+
+ .mobile-start-btn {
+  background: white;
+  border: none;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  margin-top: 1rem; 
+}
+
+.mobile-start-btn {
+  margin-left: -50px;
+   transform: rotate(-45deg) translateX(110px);
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+
+.mobile-start-btn:hover {
+   transform: rotate(-45deg) translateX(110px) scale(1.1);
+}
+
+.mobile-inner-square {
+  position: absolute;
+  width: 80%; /* slightly smaller than outer square */
+  height: 80%;
+  border: 2px dotted #ccc;
+  transform: rotate(90deg);
+  z-index: 0; /* stay behind text/button */
+}
+
+  .diamond-icon {
+    transform: rotate(45deg);
+    font-size: 1rem;
+  }
 
 }
 
 /* .mobile-hero-group {
   display: none;
 } */
-
 
 
 @media (min-width: 601px) and (max-width: 768px) {
