@@ -6,5 +6,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
-  base: './', // ✅ Important for Vercel to resolve routes correctly
-})
+  base: '/', // ✅ Use this for proper routing on Vercel!
+});
