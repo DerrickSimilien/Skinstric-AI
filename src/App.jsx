@@ -1,3 +1,5 @@
+// 🔁 Triggering redeploy to Vercel - no functional change
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
