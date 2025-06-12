@@ -452,7 +452,7 @@ button:focus-visible {
 .top-left-analysis {
   position: fixed;
   top: 65px !important;
-  left: 30px !important;;
+  left: 30px !important;
   font-family: 'Raleway', sans-serif;
   font-size: 13px;
   text-transform: uppercase;
@@ -3094,6 +3094,58 @@ input.typing {
 }
 
 
+@media (max-width: 440px) {
+  /* .top-left-analysis {
+      display: none !important; 
+  } */
+
+  .top-right-code {
+    display: none !important;
+  }
+
+
+
+  .enter-code-btn {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+  
+.introduction-page4 {
+    overflow-y: hidden !important;
+    height: 100vh !important;
+     position: relative;
+  }
+
+  html, body {
+    overflow-y: hidden !important;
+    height: 100vh !important;
+  }
+
+  .typing4,
+  .placeholder-text4 {
+    font-size: 19px !important;
+    line-height: 1.2;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .input-wrapper4 {
+    max-width: 90%;
+  }
+
+  .underline4 {
+    max-width: 90%;
+  }
+
+  .center-input4 {
+  padding: 0 -23px;
+}
+
+}
+
 
 
 
@@ -3390,16 +3442,26 @@ input.typing {
     text-align: center;
   }
 
-   .top-left-analysis {
+   /* .top-left-analysis {
     position: fixed !important;
-    top: 25px !important; /* Adjust this value up/down for perfect alignment */
+    top: 25px !important; 
     left: 12px !important;
     right: 0px;
     margin: 0 auto;
     text-align: center;
     width: 100%;
     z-index: 1000;
-  }
+  } */
+
+  .top-left-analysis {
+  position: fixed;
+  top: 25px;
+  left: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+  z-index: 1000;
+}
 
     html, body {
     height: auto !important;
@@ -3538,11 +3600,29 @@ input.typing {
     font-size: 1rem;
   }
 
+  /* .main-content {
+    padding-top: 80px;
+  }
+
+  .nav {
+position: fixed;
+top: 0;
+width: 100;
+z-index: 1000;
+
+  } */
+
+   .top-left-analysis {
+    top: 35px !important; /* Move it UP for 600px screens */
+  }
+
 }
 
 /* .mobile-hero-group {
   display: none;
 } */
+
+
 
 
 @media (min-width: 601px) and (max-width: 768px) {
